@@ -3,4 +3,5 @@
     <string name="main_page">Главная страница</string>
     <string name="mgkct">Минский государственный колледж цифровых технологий</string>
     <string name="connect_notifications">Подключите уведомления, чтобы не пропустить новые новости."</string>
+    <string name="check_all_news">Просмотреть все новости</string>
 </resources>
