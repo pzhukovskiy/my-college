@@ -1,0 +1,236 @@
+[
+  {
+    "model": "simpleView.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$DssYS5nHFy67QQJ31f1lpR$W/yvYKXo3CxMAJmOJidA4tXP9gPV0YSiSkmTDhaZoXE=",
+      "last_login": "2023-11-14T17:39:55.022Z",
+      "is_superuser": true,
+      "username": "admin",
+      "last_name": "",
+      "email": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2023-11-14T17:38:18.413Z",
+      "first_name": "",
+      "middle_name": "",
+      "student": null,
+      "teacher": null,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "simpleView.teacher",
+    "pk": 1,
+    "fields": {
+      "date_create": "2023-11-14T06:33:57Z",
+      "middle_name": "Амброжи",
+      "first_name": "Наталья",
+      "last_name": "Михайловна",
+      "image": "https://mgkct.minskedu.gov.by/files/02049/obj/650/40503/ico/icon_1.png",
+      "description": "Образование: Окончила Белорусский государственный университет им. М. Танка по специальности «Преподаватель математики и информатики»",
+      "room": 2,
+      "group": null,
+      "kurator": false,
+      "date_edit": "2023-11-14T06:34:40.700Z"
+    }
+  },
+  {
+    "model": "simpleView.teacher",
+    "pk": 2,
+    "fields": {
+      "date_create": "2023-11-14T06:33:57Z",
+      "middle_name": "Анципов",
+      "first_name": "Евгений",
+      "last_name": "Юрьевич",
+      "image": "https://mgkct.minskedu.gov.by/files/02049/obj/650/40513/ico/icon_2.png",
+      "description": "Образование: Окончил «Белорусский государственный университет физической культуры» по специальности «Спортивно-педагогическая деятельность (тренерская работа по волейболу)».",
+      "room": 3,
+      "group": null,
+      "kurator": false,
+      "date_edit": "2023-11-14T06:34:40.700Z"
+    }
+  },
+  {
+    "model": "simpleView.teacher",
+    "pk": 3,
+    "fields": {
+      "date_create": "2023-11-14T06:33:57Z",
+      "middle_name": "Барсукова",
+      "first_name": "Екатерина",
+      "last_name": "Александровна",
+      "image": "https://mgkct.minskedu.gov.by/files/02049/obj/650/40533/ico/icon_4.png",
+      "description": "Образование: Окончила Белорусский государственный педагогический университет имени Максима Танка по специальности «Английский язык, белорусский язык и литература».",
+      "room": 4,
+      "group": null,
+      "kurator": false,
+      "date_edit": "2023-11-14T06:34:40.700Z"
+    }
+  },
+  {
+    "model": "simpleView.teacher",
+    "pk": 7,
+    "fields": {
+      "date_create": "2023-11-14T06:33:57Z",
+      "middle_name": "Бровка",
+      "first_name": "Дионисий",
+      "last_name": "Сергеевич",
+      "image": "https://mgkct.minskedu.gov.by/files/02049/obj/650/40573/ico/icon_8.png",
+      "description": "Окончил «Белорусский национальный технический университет» по специальности «Профессиональное обучение (информатика)».",
+      "room": 1,
+      "group": null,
+      "kurator": false,
+      "date_edit": "2023-11-14T06:34:40.700Z"
+    }
+  },
+  {
+    "model": "simpleView.employee",
+    "pk": 1,
+    "fields": {
+      "middle_name": "Галицкий",
+      "first_name": "Максим",
+      "last_name": "Игоревич",
+      "image": "https://mgkct.minskedu.gov.by/files/02049/obj/650/42743/ico/icon_27.png",
+      "description": "Образование: Окончил «Белорусский национальный технический университет» по специальности «Профессиональное обучение (информатика)»."
+    }
+  },
+  {
+    "model": "simpleView.employeeahch",
+    "pk": 1,
+    "fields": {
+      "middle_name": "Дернейко",
+      "first_name": "Александр",
+      "last_name": "Степанович",
+      "image": "https://mgkct.minskedu.gov.by/files/02049/obj/650/42713/ico/icon_24.png",
+      "description": "Образование: Окончил Государственное профессионально-техническое училище № 118 машиностроения, Минский заочный политехнический техникум по специальности «Обработка металлов резанием»"
+    }
+  },
+  {
+    "model": "simpleView.room",
+    "pk": 100,
+    "fields": { "room": "-", "corpus": 1 }
+  },
+  {
+    "model": "simpleView.room",
+    "pk": 101,
+    "fields": { "room": "-", "corpus": 2 }
+  },
+
+  {
+    "model": "simpleView.room",
+    "pk": 1,
+    "fields": { "room": "3-208", "corpus": 1 }
+  },
+  {
+    "model": "simpleView.room",
+    "pk": 2,
+    "fields": { "room": "303", "corpus": 1 }
+  },
+  {
+    "model": "simpleView.room",
+    "pk": 3,
+    "fields": { "room": "4-208", "corpus": 1 }
+  },
+  {
+    "model": "simpleView.room",
+    "pk": 4,
+    "fields": { "room": "3-210", "corpus": 1 }
+  },
+  {
+    "model": "simpleView.lesson",
+    "pk": 1,
+    "fields": {
+      "subgroup": 1,
+      "lesson_type": "Практическая работа",
+      "room": 1,
+      "teacher": 1,
+      "subject": 1,
+      "group": 1,
+      "corpus": 1,
+      "lesson_number": 2,
+      "date": "2023-11-14"
+    }
+  },
+  {
+    "model": "simpleView.lesson",
+    "pk": 2,
+    "fields": {
+      "subgroup": 2,
+      "lesson_type": "Практическая работа",
+      "room": 2,
+      "teacher": 2,
+      "subject": 2,
+      "group": 2,
+      "corpus": 1,
+      "lesson_number": 1,
+      "date": "2023-11-14"
+    }
+  },
+  {
+    "model": "simpleView.corpus",
+    "pk": 1,
+    "fields": { "corpus": "г. Минск, ул. Казинца, 91" }
+  },
+  {
+    "model": "simpleView.corpus",
+    "pk": 2,
+    "fields": { "corpus": "г. Минск, ул. Кнорина, 14" }
+  },
+  {
+    "model": "simpleView.subject",
+    "pk": 1,
+    "fields": {
+      "date_create": "2023-11-14T06:34:47Z",
+      "subject": "Разработка приложений для мобильных устройств",
+      "description": "Изучение java, android для мобильной разработки",
+      "type_subject": "Спецпредмет",
+      "date_edit": "2023-11-14T06:34:54.440Z"
+    }
+  },
+  { "model": "simpleView.group", "pk": 1, "fields": { "group": "160*" } },
+  { "model": "simpleView.group", "pk": 2, "fields": { "group": "162*" } },
+  { "model": "simpleView.group", "pk": 3, "fields": { "group": "163*" } },
+  { "model": "simpleView.group", "pk": 4, "fields": { "group": "164*" } },
+  { "model": "simpleView.group", "pk": 5, "fields": { "group": "165*" } },
+  { "model": "simpleView.group", "pk": 6, "fields": { "group": "166*" } },
+  { "model": "simpleView.group", "pk": 7, "fields": { "group": "49" } },
+  { "model": "simpleView.group", "pk": 8, "fields": { "group": "50" } },
+  { "model": "simpleView.group", "pk": 9, "fields": { "group": "51" } },
+  {
+    "model": "simpleView.news",
+    "pk": 1,
+    "fields": {
+      "date_create": "2023-11-14T06:32:52Z",
+      "title": "Международный день слепых!",
+      "image": "https://mgkct.minskedu.gov.by/files/02049/obj/120/52213/ico/8hwa2MaS8UI.jpg",
+      "description": "13 ноября –  МЕЖДУНАРОДНЫЙ ДЕНЬ СЛЕПЫХ",
+      "main_text": "По сложившейся традиции Минский государственный колледж цифровых технологий 13 ноября 2023 года в очередной раз открывает листок  календаря своей инклюзивной жизни, посвящённого дню международного внимания к проблемам людей с «ограничениями»",
+      "date_edit": "2023-11-14T06:33:48.893Z"
+    }
+  },
+  {
+    "model": "simpleView.news",
+    "pk": 2,
+    "fields": {
+      "date_create": "2023-11-14T06:32:52Z",
+      "title": "Международный день слепых!",
+      "image": "https://mgkct.minskedu.gov.by/files/02049/obj/120/52213/ico/8hwa2MaS8UI.jpg",
+      "description": "13 ноября –  МЕЖДУНАРОДНЫЙ ДЕНЬ СЛЕПЫХ НОВОСТЬ 2",
+      "main_text": "По сложившейся традиции Минский государственный колледж цифровых технологий 13 ноября 2023 года в очередной раз открывает листок  календаря своей инклюзивной жизни, посвящённого дню международного внимания к проблемам людей с «ограничениями»",
+      "date_edit": "2023-11-14T06:33:48.893Z"
+    }
+  },
+  {
+    "model": "simpleView.news",
+    "pk": 3,
+    "fields": {
+      "date_create": "2023-11-14T06:32:52Z",
+      "title": "Международный день слепых!",
+      "image": "https://mgkct.minskedu.gov.by/files/02049/obj/120/52213/ico/8hwa2MaS8UI.jpg",
+      "description": "13 ноября –  МЕЖДУНАРОДНЫЙ ДЕНЬ СЛЕПЫХ НОВОСТЬ 3",
+      "main_text": "По сложившейся традиции Минский государственный колледж цифровых технологий 13 ноября 2023 года в очередной раз открывает листок  календаря своей инклюзивной жизни, посвящённого дню международного внимания к проблемам людей с «ограничениями»",
+      "date_edit": "2023-11-14T06:33:48.893Z"
+    }
+  }
+]

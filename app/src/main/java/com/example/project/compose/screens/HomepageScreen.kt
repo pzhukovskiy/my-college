@@ -1,8 +1,8 @@
 package com.example.project.compose.screens
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,43 +11,46 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import coil.compose.AsyncImage
 import com.example.project.R
 import com.example.project.compose.widgets.AnimatedHeaderWidget
-
-//scrollState.maxValue == 1423
+import com.example.project.data.news.NewsInfo
+import com.example.project.navigation.NavigationItem
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun HomepageScreen() {
+fun HomepageScreen(
+    navController: NavHostController,
+    newsList: List<NewsInfo>
+) {
 
     val scrollState = rememberScrollState()
-    val images = listOf(
-        R.drawable.king_kohli,
-        R.drawable.football,
-        R.drawable.football2,
-    )
 
     Box {
 
         val pagerState = rememberPagerState()
 
+        val images = newsList.map { it.fields.image }
+        val pk = newsList.map { it.pk }
 
         Column(
             modifier = Modifier
@@ -61,60 +64,60 @@ fun HomepageScreen() {
                 contentAlignment = Alignment.Center,
             ) {
                 HorizontalPager(
-                    pageCount = images.size,
+                    pageCount = newsList.size,
                     state = pagerState,
-                    key = {images[it]},
+                    key = { pk[it]},
                     pageSize = PageSize.Fill
                 ) { index ->
-                    Image(
-                        painter = painterResource(id = images[index]),
-                        contentDescription = null,
-                        modifier = Modifier.fillMaxSize(),
-                        contentScale = ContentScale.Crop
-                    )
+                    AsyncImage(
+                        model = images[index],
+                        contentDescription = pk[index].toString(),
+                        modifier = Modifier
+                        .fillMaxSize()
+                        .clickable {
+                            navController.navigate("${NavigationItem.DetailNews.route}/${pk[index]}")
+                        },
+                        contentScale = ContentScale.Crop)
                     Column(
                         modifier = Modifier
-                            .padding(top = 350.dp)
+                            .padding(top = 450.dp)
                     ) {
                         Box(
                             modifier = Modifier
-                                .height(40.dp)
+                                .height(20.dp)
                                 .fillMaxWidth()
-                                .padding(horizontal = 120.dp)
-                                .background(Color.White)
                         ) {
                             Row(
                                 modifier = Modifier
-                                    .height(40.dp)
+                                    .height(20.dp)
                                     .fillMaxWidth(),
                                 verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.SpaceAround
+                                horizontalArrangement = Arrangement.Center
                             ) {
                                 repeat(images.size) {
+                                    val color = if (pagerState.currentPage == it) Color.DarkGray else Color.LightGray
                                     Box(
-                                        contentAlignment = Alignment.Center,
                                         modifier = Modifier
-                                            .height(30.dp)
-                                            .width(30.dp)
-                                            .background(if (it == index) Color.Black else Color.LightGray)
-                                    ) {
-                                        Text(text = it.toString(), color = (if (it == index) Color.White else Color.Black))
-                                    }
+                                            .padding(2.dp)
+                                            .clip(CircleShape)
+                                            .background(color)
+                                            .size(16.dp)
+                                    )
                                 }
                             }
                         }
 
-                        //последний box с текстом
-                        if (index == images.size - 1) {
-                            Text(
-                                text = stringResource(id = R.string.check_all_news),
-                                color = Color.White,
-                                modifier = Modifier
-                                    .padding(top = 10.dp)
-                                    .fillMaxWidth()
-                                    .wrapContentSize(align = Alignment.Center)
-                            )
-                        }
+                        //last box with text
+//                        if (index == images.size - 1) {
+//                            Text(
+//                                text = stringResource(id = R.string.check_all_news),
+//                                color = Color.White,
+//                                modifier = Modifier
+//                                    .padding(top = 10.dp)
+//                                    .fillMaxWidth()
+//                                    .wrapContentSize(align = Alignment.Center)
+//                            )
+//                        }
                     }
                 }
             }
