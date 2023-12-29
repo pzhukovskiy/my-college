@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
                     composable(NavigationItem.Homepage.route) {
                             HomepageScreen(
                                 navController = navController,
-                                newsList = newsList
+                                newsList = newsList,
                             )
                     }
 
@@ -46,6 +46,7 @@ class MainActivity : ComponentActivity() {
                         selectedItem?.let {
                             DetailNewsScreen(
                                 news = it,
+                                context = LocalContext.current,
                                 onBackClick = {
                                     navController.popBackStack()
                                 }

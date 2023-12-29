@@ -80,7 +80,7 @@ fun HomepageScreen(
                         contentScale = ContentScale.Crop)
                     Column(
                         modifier = Modifier
-                            .padding(top = 450.dp)
+                            .padding(top = 520.dp)
                     ) {
                         Box(
                             modifier = Modifier
@@ -101,7 +101,7 @@ fun HomepageScreen(
                                             .padding(2.dp)
                                             .clip(CircleShape)
                                             .background(color)
-                                            .size(16.dp)
+                                            .size(12.dp)
                                     )
                                 }
                             }
