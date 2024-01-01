@@ -32,7 +32,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.project.R
+import com.example.project.compose.widgets.AdminLinksWidget
 import com.example.project.compose.widgets.AnimatedHeaderWidget
+import com.example.project.compose.widgets.InformationAboutCollegeWidget
 import com.example.project.data.news.NewsInfo
 import com.example.project.navigation.NavigationItem
 
@@ -73,10 +75,10 @@ fun HomepageScreen(
                         model = images[index],
                         contentDescription = pk[index].toString(),
                         modifier = Modifier
-                        .fillMaxSize()
-                        .clickable {
-                            navController.navigate("${NavigationItem.DetailNews.route}/${pk[index]}")
-                        },
+                            .fillMaxSize()
+                            .clickable {
+                                navController.navigate("${NavigationItem.DetailNews.route}/${pk[index]}")
+                            },
                         contentScale = ContentScale.Crop)
                     Column(
                         modifier = Modifier
@@ -106,18 +108,6 @@ fun HomepageScreen(
                                 }
                             }
                         }
-
-                        //last box with text
-//                        if (index == images.size - 1) {
-//                            Text(
-//                                text = stringResource(id = R.string.check_all_news),
-//                                color = Color.White,
-//                                modifier = Modifier
-//                                    .padding(top = 10.dp)
-//                                    .fillMaxWidth()
-//                                    .wrapContentSize(align = Alignment.Center)
-//                            )
-//                        }
                     }
                 }
             }
@@ -134,17 +124,9 @@ fun HomepageScreen(
                 style = MaterialTheme.typography.body1
             )
 
-            Text(
-                text = "fjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasj",
-                modifier = Modifier.padding(horizontal = 12.dp, vertical = 4.dp),
-                style = MaterialTheme.typography.body1
-            )
+            AdminLinksWidget()
 
-            Text(
-                text = "fjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasj",
-                modifier = Modifier.padding(horizontal = 12.dp, vertical = 4.dp),
-                style = MaterialTheme.typography.body1
-            )
+            InformationAboutCollegeWidget()
         }
 
         AnimatedHeaderWidget(
