@@ -34,6 +34,7 @@ import coil.compose.AsyncImage
 import com.example.project.R
 import com.example.project.compose.widgets.AdminLinksWidget
 import com.example.project.compose.widgets.AnimatedHeaderWidget
+import com.example.project.compose.widgets.BottomBarWidget
 import com.example.project.compose.widgets.InformationAboutCollegeWidget
 import com.example.project.data.news.NewsInfo
 import com.example.project.navigation.NavigationItem
@@ -127,6 +128,8 @@ fun HomepageScreen(
             AdminLinksWidget()
 
             InformationAboutCollegeWidget()
+
+            BottomBarWidget()
         }
 
         AnimatedHeaderWidget(

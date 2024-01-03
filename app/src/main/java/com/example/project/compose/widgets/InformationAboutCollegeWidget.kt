@@ -49,8 +49,5 @@ fun InformationAboutCollegeWidget() {
 
             TelephoneButtonWidget(context = LocalContext.current)
         }
-
     }
-
-    Spacer(modifier = Modifier.padding(20.dp))
 }
