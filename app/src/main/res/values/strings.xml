@@ -9,5 +9,17 @@
     <string name="links">Полезные ссылки</string>
     <string name="settings">Настройки</string>
 
+    <string name="error_open_app">Невозможно открыть приложение</string>
+    <string name="write_mail">Написать на почту</string>
+    <string name="mail_address">test_test@mail.test</string>
+    <string name="mail_subject">Тема письма</string>
+    <string name="mail_text_morning">Доброе утро, это текст сообщения, измените его</string>
+    <string name="mail_text_day">Добрый день, это текст сообщения, измените его</string>
+    <string name="mail_text_evening">Добрый вечер, это текст сообщения, измените его</string>
+    <string name="mail_text_night">Доброй ночи, это текст сообщения, измените его</string>
+
+    <string name="schedule">Изменение расписания</string>
+    <string name="schedule_new">Просмотрите новое расписаниео</string>
+
     <string name="web_client_id">788633020834-m64n15oknbing4u404mljlje7k1q02ug.apps.googleusercontent.com</string>
 </resources>

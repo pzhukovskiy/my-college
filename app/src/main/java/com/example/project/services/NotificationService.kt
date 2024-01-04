@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory
 import androidx.annotation.DrawableRes
 import androidx.core.app.NotificationCompat
 import com.example.project.R
-import com.example.project.utilities.NotificationsText
 import kotlin.random.Random
 
 class NotificationService(
@@ -15,8 +14,8 @@ class NotificationService(
     private val notificationManager=context.getSystemService(NotificationManager::class.java)
     fun showBasicNotification(){
         val notification= NotificationCompat.Builder(context,"project_notification")
-            .setContentTitle(NotificationsText.Title.text)
-            .setContentText(NotificationsText.Text.text)
+            .setContentTitle(context.getString(R.string.schedule))
+            .setContentText(context.getString(R.string.schedule_new))
             .setSmallIcon(R.drawable.logo)
             .setPriority(NotificationManager.IMPORTANCE_HIGH)
             .setAutoCancel(true)
@@ -30,8 +29,8 @@ class NotificationService(
 
     fun showExpandableNotification(){
         val notification= NotificationCompat.Builder(context,"project_notification")
-            .setContentTitle(NotificationsText.Title.text)
-            .setContentText(NotificationsText.Text.text)
+            .setContentTitle(context.getString(R.string.schedule))
+            .setContentText(context.getString(R.string.schedule_new))
             .setSmallIcon(R.drawable.logo)
             .setPriority(NotificationManager.IMPORTANCE_HIGH)
             .setAutoCancel(true)

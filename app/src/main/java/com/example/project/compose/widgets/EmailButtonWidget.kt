@@ -28,9 +28,9 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.project.R
 import com.example.project.ui.theme.PrimaryBlue
 import com.example.project.ui.theme.Roboto
-import com.example.project.utilities.EmailText
 import java.text.SimpleDateFormat
 import java.util.Date
 
@@ -51,85 +51,85 @@ fun EmailButtonWidget(
                     data = Uri.parse("mailto:")
 
                     if (currentTime.format(Date()) >= "00:00" && currentTime.format(Date()) <= "01:00") {
-                        putExtra(Intent.EXTRA_TEXT, EmailText.MailTextNight.text)
+                        putExtra(Intent.EXTRA_TEXT, context.getString(R.string.mail_text_night))
                     }
                     else if (currentTime.format(Date()) >= "01:00" && currentTime.format(Date()) <= "02:00") {
-                        putExtra(Intent.EXTRA_TEXT, EmailText.MailTextNight.text)
+                        putExtra(Intent.EXTRA_TEXT, context.getString(R.string.mail_text_night))
                     }
                     else if (currentTime.format(Date()) >= "02:00" && currentTime.format(Date()) <= "03:00") {
-                        putExtra(Intent.EXTRA_TEXT, EmailText.MailTextNight.text)
+                        putExtra(Intent.EXTRA_TEXT, context.getString(R.string.mail_text_night))
                     }
                     else if (currentTime.format(Date()) >= "03:00" && currentTime.format(Date()) <= "04:00") {
-                        putExtra(Intent.EXTRA_TEXT, EmailText.MailTextNight.text)
+                        putExtra(Intent.EXTRA_TEXT, context.getString(R.string.mail_text_night))
                     }
                     else if (currentTime.format(Date()) >= "04:00" && currentTime.format(Date()) <= "05:00") {
-                        putExtra(Intent.EXTRA_TEXT, EmailText.MailTextMorning.text)
+                        putExtra(Intent.EXTRA_TEXT, context.getString(R.string.mail_text_morning))
                     }
                     else if (currentTime.format(Date()) >= "05:00" && currentTime.format(Date()) <= "06:00") {
-                        putExtra(Intent.EXTRA_TEXT, EmailText.MailTextMorning.text)
+                        putExtra(Intent.EXTRA_TEXT, context.getString(R.string.mail_text_morning))
                     }
                     else if (currentTime.format(Date()) >= "06:00" && currentTime.format(Date()) <= "07:00") {
-                        putExtra(Intent.EXTRA_TEXT, EmailText.MailTextMorning.text)
+                        putExtra(Intent.EXTRA_TEXT, context.getString(R.string.mail_text_morning))
                     }
                     else if (currentTime.format(Date()) >= "07:00" && currentTime.format(Date()) <= "08:00") {
-                        putExtra(Intent.EXTRA_TEXT, EmailText.MailTextMorning.text)
+                        putExtra(Intent.EXTRA_TEXT, context.getString(R.string.mail_text_morning))
                     }
                     else if (currentTime.format(Date()) >= "08:00" && currentTime.format(Date()) <= "09:00") {
-                        putExtra(Intent.EXTRA_TEXT, EmailText.MailTextMorning.text)
+                        putExtra(Intent.EXTRA_TEXT, context.getString(R.string.mail_text_morning))
                     }
                     else if (currentTime.format(Date()) >= "09:00" && currentTime.format(Date()) <= "10:00") {
-                        putExtra(Intent.EXTRA_TEXT, EmailText.MailTextMorning.text)
+                        putExtra(Intent.EXTRA_TEXT, context.getString(R.string.mail_text_morning))
                     }
                     else if (currentTime.format(Date()) >= "10:00" && currentTime.format(Date()) <= "11:00") {
-                        putExtra(Intent.EXTRA_TEXT, EmailText.MailTextMorning.text)
+                        putExtra(Intent.EXTRA_TEXT, context.getString(R.string.mail_text_morning))
                     }
                     else if (currentTime.format(Date()) >= "11:00" && currentTime.format(Date()) <= "12:00") {
-                        putExtra(Intent.EXTRA_TEXT, EmailText.MailTextMorning.text)
+                        putExtra(Intent.EXTRA_TEXT, context.getString(R.string.mail_text_morning))
                     }
                     else if (currentTime.format(Date()) >= "12:00" && currentTime.format(Date()) <= "13:00") {
-                        putExtra(Intent.EXTRA_TEXT, EmailText.MailTextDay.text)
+                        putExtra(Intent.EXTRA_TEXT, context.getString(R.string.mail_text_day))
                     }
                     else if (currentTime.format(Date()) >= "13:00" && currentTime.format(Date()) <= "14:00") {
-                        putExtra(Intent.EXTRA_TEXT, EmailText.MailTextDay.text)
+                        putExtra(Intent.EXTRA_TEXT, context.getString(R.string.mail_text_day))
                     }
                     else if (currentTime.format(Date()) >= "14:00" && currentTime.format(Date()) <= "15:00") {
-                        putExtra(Intent.EXTRA_TEXT, EmailText.MailTextDay.text)
+                        putExtra(Intent.EXTRA_TEXT, context.getString(R.string.mail_text_day))
                     }
                     else if (currentTime.format(Date()) >= "15:00" && currentTime.format(Date()) <= "16:00") {
-                        putExtra(Intent.EXTRA_TEXT, EmailText.MailTextDay.text)
+                        putExtra(Intent.EXTRA_TEXT, context.getString(R.string.mail_text_day))
                     }
                     else if (currentTime.format(Date()) >= "16:00" && currentTime.format(Date()) <= "17:00") {
-                        putExtra(Intent.EXTRA_TEXT, EmailText.MailTextDay.text)
+                        putExtra(Intent.EXTRA_TEXT, context.getString(R.string.mail_text_day))
                     }
                     else if (currentTime.format(Date()) >= "17:00" && currentTime.format(Date()) <= "18:00") {
-                        putExtra(Intent.EXTRA_TEXT, EmailText.MailTextEvening.text)
+                        putExtra(Intent.EXTRA_TEXT, context.getString(R.string.mail_text_evening))
                     }
                     else if (currentTime.format(Date()) >= "18:00" && currentTime.format(Date()) <= "19:00") {
-                        putExtra(Intent.EXTRA_TEXT, EmailText.MailTextEvening.text)
+                        putExtra(Intent.EXTRA_TEXT, context.getString(R.string.mail_text_evening))
                     }
                     else if (currentTime.format(Date()) >= "19:00" && currentTime.format(Date()) <= "20:00") {
-                        putExtra(Intent.EXTRA_TEXT, EmailText.MailTextEvening.text)
+                        putExtra(Intent.EXTRA_TEXT, context.getString(R.string.mail_text_evening))
                     }
                     else if (currentTime.format(Date()) >= "20:00" && currentTime.format(Date()) <= "21:00") {
-                        putExtra(Intent.EXTRA_TEXT, EmailText.MailTextEvening.text)
+                        putExtra(Intent.EXTRA_TEXT, context.getString(R.string.mail_text_evening))
                     }
                     else if (currentTime.format(Date()) >= "21:00" && currentTime.format(Date()) <= "22:00") {
-                        putExtra(Intent.EXTRA_TEXT, EmailText.MailTextEvening.text)
+                        putExtra(Intent.EXTRA_TEXT, context.getString(R.string.mail_text_evening))
                     }
                     else if (currentTime.format(Date()) >= "22:00" && currentTime.format(Date()) <= "23:00") {
-                        putExtra(Intent.EXTRA_TEXT, EmailText.MailTextEvening.text)
+                        putExtra(Intent.EXTRA_TEXT, context.getString(R.string.mail_text_evening))
                     }
                     else if (currentTime.format(Date()) >= "23:00" && currentTime.format(Date()) <= "00:00") {
-                        putExtra(Intent.EXTRA_TEXT, EmailText.MailTextEvening.text)
+                        putExtra(Intent.EXTRA_TEXT, context.getString(R.string.mail_text_evening))
                     }
-                    putExtra(Intent.EXTRA_EMAIL, arrayOf(EmailText.MailAddress.text))
-                    putExtra(Intent.EXTRA_SUBJECT, EmailText.MailSubject.text)
+                    putExtra(Intent.EXTRA_EMAIL, arrayOf(context.getString(R.string.mail_address)))
+                    putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.mail_subject))
                 }
 
                 if (intent.resolveActivity(context.packageManager) != null) {
                     context.startActivity(intent)
                 } else {
-                    Toast.makeText(context, "Невозможно открыть приложение", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, context.getString(R.string.error_open_app), Toast.LENGTH_LONG).show()
                 }
             },
     ) {
@@ -146,7 +146,7 @@ fun EmailButtonWidget(
             )
             Spacer(modifier = Modifier.width(ButtonDefaults.IconSize / 4))
             Text(
-                text = "Написать на почту",
+                text = context.getString(R.string.write_mail),
                 fontFamily = Roboto,
                 fontStyle = FontStyle.Normal,
                 fontWeight = FontWeight(400),

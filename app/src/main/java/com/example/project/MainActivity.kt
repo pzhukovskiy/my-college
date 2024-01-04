@@ -1,6 +1,5 @@
 package com.example.project
 
-import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
@@ -89,7 +88,6 @@ class MainActivity : ComponentActivity() {
                         selectedItem?.let {
                             DetailNewsScreen(
                                 news = it,
-                                context = LocalContext.current,
                                 onBackClick = {
                                     navController.popBackStack()
                                 }
