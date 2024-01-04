@@ -74,7 +74,7 @@ fun BottomBarCustomWidget(
                 }
             }
             Box(
-                modifier = Modifier.weight(1f),
+                modifier = Modifier.weight(1f).clickable { navController.navigate(NavigationItem.SettingsPage.route) },
                 contentAlignment = Alignment.Center
             ) {
                 Column(

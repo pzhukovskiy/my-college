@@ -6,4 +6,5 @@ sealed class NavigationItem(val route: String) {
     object ListAllNews : NavigationItem("ListAllNews")//ListAllNews
     object ListAllLinks : NavigationItem("ListAllLinks")//ListAllLinksScreen
     object SettingsPage : NavigationItem("SettingsPage")//SettingsPageScreen
+    object Profile : NavigationItem("ProfilePage")//ProfilePageScreen
 }
