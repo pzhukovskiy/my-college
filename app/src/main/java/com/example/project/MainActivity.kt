@@ -18,6 +18,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.project.compose.screens.DetailNewsScreen
 import com.example.project.compose.screens.HomepageScreen
+import com.example.project.compose.screens.ListAllLinksScreen
+import com.example.project.compose.screens.SettingsPageScreen
 import com.example.project.navigation.NavigationItem
 import com.example.project.ui.theme.ProjectTheme
 import com.example.project.utilities.parseListNews
@@ -45,8 +47,10 @@ class MainActivity : ComponentActivity() {
             ProjectTheme {
                 NavHost(
                     navController = navController,
-                    startDestination = NavigationItem.Homepage.route
+                    startDestination = NavigationItem.SettingsPage.route
                 ) {
+
+                    //homepage
                     composable(NavigationItem.Homepage.route) {
                             HomepageScreen(
                                 navController = navController,
@@ -54,6 +58,7 @@ class MainActivity : ComponentActivity() {
                             )
                     }
 
+                    //information about news
                     composable("${NavigationItem.DetailNews.route}/{id}",
                         arguments = listOf(navArgument("id") { type = NavType.IntType })
                     ) { backStackEntry ->
@@ -68,6 +73,18 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
                         }
+                    }
+
+                    //list all links
+                    composable(NavigationItem.ListAllLinks.route) {
+                        ListAllLinksScreen(onBackClick = {
+                            navController.popBackStack()
+                        })
+                    }
+
+                    //settings page
+                    composable(NavigationItem.SettingsPage.route) {
+                        SettingsPageScreen()
                     }
                 }
             }

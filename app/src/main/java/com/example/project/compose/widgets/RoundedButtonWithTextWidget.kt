@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import com.example.project.ui.theme.Roboto
 import com.example.project.utilities.calculateWidthForButton
 
-//считает ширину в зависимости от длины слова
+//calculates the length of the button depending on the length of the word
 @Composable
 fun RoundedButtonWithTextWidget(text: String, height: Dp, color: Color, onClick: () -> Unit) {
     Box(
