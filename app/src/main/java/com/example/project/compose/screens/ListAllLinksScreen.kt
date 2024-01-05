@@ -1,7 +1,8 @@
 package com.example.project.compose.screens
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.background
+import android.content.Context
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,7 +16,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -26,16 +26,35 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.project.R
 import com.example.project.compose.widgets.StaticHeaderWidget
+import com.example.project.data.links.Links
+import com.example.project.navigation.NavigationItem
 import com.example.project.ui.theme.Roboto
-import com.example.project.utilities.listAllLinks
+import java.util.UUID
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun ListAllLinksScreen(
+    context: Context,
+    navController: NavController,
     onBackClick: () -> Unit
 ) {
+
+    val uuid = UUID.randomUUID()
+
+    val listAllLinks = listOf(
+        Links(id = uuid.toString(), text = context.getString(R.string.link_about_college),  route = NavigationItem.AboutCollege.route),
+        Links(id = uuid.toString(), text = context.getString(R.string.link_abiturient), route = NavigationItem.AboutCollege.route),
+        Links(id = uuid.toString(), text = context.getString(R.string.link_schedule_week_teenagers), route = NavigationItem.AboutCollege.route),
+        Links(id = uuid.toString(), text = context.getString(R.string.link_schedule_day_teenagers), route = NavigationItem.AboutCollege.route),
+        Links(id = uuid.toString(), text = context.getString(R.string.link_schedule_week_teachers), route = NavigationItem.AboutCollege.route),
+        Links(id = uuid.toString(), text = context.getString(R.string.link_schedule_day_teachers), route = NavigationItem.AboutCollege.route),
+        Links(id = uuid.toString(), text = context.getString(R.string.link_calls), route = NavigationItem.AboutCollege.route),
+        Links(id = uuid.toString(), text = context.getString(R.string.link_exams), route = NavigationItem.AboutCollege.route),
+        Links(id = uuid.toString(), text = context.getString(R.string.link_courses), route = NavigationItem.AboutCollege.route)
+    )
 
     Scaffold(
         content = {
@@ -53,29 +72,31 @@ fun ListAllLinksScreen(
                         Box(
                             modifier = Modifier
                                 .height(50.dp)
-                                .background(Color.LightGray),
+                                .clickable {
+                                       navController.navigate(link.route)
+                                },
                             contentAlignment = Alignment.CenterEnd
                         ) {
                             Box(
                                 contentAlignment = Alignment.CenterEnd,
-                                modifier = Modifier.fillMaxWidth()
+                                modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp)
                             ) {
-                                IconButton(onClick = { /*TODO*/ }) {
+                                IconButton(onClick = { navController.navigate(link.route) }) {
                                     Icon(
                                         Icons.Default.ArrowForward,
                                         contentDescription = "Forward",
-                                        tint = Color.White
+                                        tint = Color.Black
                                     )
                                 }
                                 Text(
                                     text = link.text,
-                                    style = MaterialTheme.typography.h6,
-                                    color = Color.White,
+                                    style = MaterialTheme.typography.body2,
+                                    color = Color.Black,
                                     fontFamily = Roboto,
                                     fontStyle = FontStyle.Normal,
                                     fontWeight = FontWeight(500),
                                     modifier = Modifier
-                                        .align(Alignment.Center)
+                                        .align(Alignment.CenterStart)
                                 )
                             }
                         }

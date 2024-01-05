@@ -26,6 +26,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.project.auth.GoogleAuthUiClient
 import com.example.project.auth.SignInViewModel
+import com.example.project.compose.screens.AboutCollegeScreen
 import com.example.project.compose.screens.DetailNewsScreen
 import com.example.project.compose.screens.HomepageScreen
 import com.example.project.compose.screens.ListAllLinksScreen
@@ -97,9 +98,13 @@ class MainActivity : ComponentActivity() {
 
                     //list all links
                     composable(NavigationItem.ListAllLinks.route) {
-                        ListAllLinksScreen(onBackClick = {
-                            navController.popBackStack()
-                        })
+                        ListAllLinksScreen(
+                            context = LocalContext.current,
+                            navController = navController,
+                            onBackClick = {
+                                navController.popBackStack()
+                            }
+                        )
                     }
 
                     //settings page with auth
@@ -161,6 +166,15 @@ class MainActivity : ComponentActivity() {
 
                                     navController.popBackStack()
                                 }
+                            }
+                        )
+                    }
+
+                    //about college
+                    composable(NavigationItem.AboutCollege.route) {
+                        AboutCollegeScreen(
+                            onBackClick = {
+                                navController.popBackStack()
                             }
                         )
                     }

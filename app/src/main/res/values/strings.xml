@@ -21,5 +21,15 @@
     <string name="schedule">Изменение расписания</string>
     <string name="schedule_new">Просмотрите новое расписаниео</string>
 
+    <string name="link_about_college">О колледже</string>
+    <string name="link_abiturient">Абитуриентам</string>
+    <string name="link_schedule_week_teenagers">Расписание на неделю (обучающиеся)</string>
+    <string name="link_schedule_day_teenagers">Расписание на день (обучающиеся)</string>
+    <string name="link_schedule_week_teachers">Расписание на неделю (преподаватели)</string>
+    <string name="link_schedule_day_teachers">Расписание на день (преподаватели)</string>
+    <string name="link_calls">Расписание звонков</string>
+    <string name="link_exams">График экзаменов</string>
+    <string name="link_courses">Платные курсы</string>
+
     <string name="web_client_id">788633020834-m64n15oknbing4u404mljlje7k1q02ug.apps.googleusercontent.com</string>
 </resources>
