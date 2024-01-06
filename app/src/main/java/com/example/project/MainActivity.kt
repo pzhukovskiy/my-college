@@ -32,6 +32,7 @@ import com.example.project.compose.screens.DetailNewsScreen
 import com.example.project.compose.screens.HomepageScreen
 import com.example.project.compose.screens.ListAllLinksScreen
 import com.example.project.compose.screens.ProfilePageScreen
+import com.example.project.compose.screens.RegistrationPageScreen
 import com.example.project.compose.screens.SettingsPageScreen
 import com.example.project.navigation.NavigationItem
 import com.example.project.ui.theme.ProjectTheme
@@ -72,7 +73,7 @@ class MainActivity : ComponentActivity() {
             ProjectTheme {
                 NavHost(
                     navController = navController,
-                    startDestination = NavigationItem.Homepage.route
+                    startDestination = NavigationItem.RegistrationPage.route
                 ) {
 
                     //homepage
@@ -80,6 +81,7 @@ class MainActivity : ComponentActivity() {
                             HomepageScreen(
                                 navController = navController,
                                 newsList = newsList,
+                                userData = googleAuthUiClient.getSignedInUser()
                             )
                     }
 
@@ -110,14 +112,14 @@ class MainActivity : ComponentActivity() {
                         )
                     }
 
-                    //settings page with auth
-                    composable(NavigationItem.SettingsPage.route) {
+                    //registration page
+                    composable(NavigationItem.RegistrationPage.route) {
                         val viewModel = viewModel<SignInViewModel>()
                         val state by viewModel.state.collectAsStateWithLifecycle()
 
                         LaunchedEffect(key1 = Unit) {
                             if (googleAuthUiClient.getSignedInUser() != null) {
-                                navController.navigate(NavigationItem.Profile.route)
+                                navController.navigate(NavigationItem.Homepage.route)
                             }
                         }
 
@@ -138,12 +140,12 @@ class MainActivity : ComponentActivity() {
                         LaunchedEffect(key1 = state.isSignInSuccessful) {
                             if (state.isSignInSuccessful) {
                                 Toast.makeText(applicationContext, "Успешный вход", Toast.LENGTH_LONG).show()
-                                navController.navigate(NavigationItem.Profile.route)
+                                navController.navigate(NavigationItem.Homepage.route)
                                 viewModel.resetState()
                             }
                         }
 
-                        SettingsPageScreen(
+                        RegistrationPageScreen(
                             state = state,
                             onSignInClick = {
                                 lifecycleScope.launch {
@@ -158,6 +160,12 @@ class MainActivity : ComponentActivity() {
                         )
                     }
 
+
+                    //settings page
+                    composable(NavigationItem.SettingsPage.route) {
+                        SettingsPageScreen()
+                    }
+
                     //profile
                     composable(NavigationItem.Profile.route) {
                         ProfilePageScreen(
@@ -166,8 +174,7 @@ class MainActivity : ComponentActivity() {
                                 lifecycleScope.launch {
                                     googleAuthUiClient.signOut()
                                     Toast.makeText(applicationContext, "Успешно вышли", Toast.LENGTH_LONG).show()
-
-                                    navController.popBackStack()
+                                    navController.navigate(NavigationItem.Homepage.route)
                                 }
                             }
                         )

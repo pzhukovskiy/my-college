@@ -6,6 +6,7 @@
     <string name="home">Домашняя страница</string>
     <string name="links">Полезные ссылки</string>
     <string name="settings">Настройки</string>
+    <string name="profile">Профиль</string>
 
     <string name="error_open_app">Невозможно открыть приложение</string>
     <string name="write_mail">Написать на почту</string>
