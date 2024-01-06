@@ -1,8 +1,8 @@
 package com.example.project.compose.widgets
 
+import android.content.Context
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -14,23 +14,26 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.project.R
 import com.example.project.ui.theme.Roboto
 import java.util.Calendar
 
 @Composable
-fun InformationAboutCollegeWidget() {
+fun InformationAboutCollegeWidget(
+    context: Context
+) {
 
     val year = Calendar.getInstance().get(Calendar.YEAR)
 
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(150.dp)
+            .height(140.dp)
             .padding(horizontal = 12.dp, vertical = 4.dp)
     ) {
         Column {
             Text(
-                text = "© УО Минский государственный колледж цифровых технологий, $year",
+                text = "${context.getString(R.string.college_name)} $year",
                 fontFamily = Roboto,
                 fontStyle = FontStyle.Normal,
                 fontWeight = FontWeight(700),
@@ -38,7 +41,7 @@ fun InformationAboutCollegeWidget() {
             )
 
             Text(
-                text = "Адрес: 220108, Республика Беларусь, г. Минск, ул. Казинца, 91",
+                text = context.getString(R.string.college_address),
                 fontFamily = Roboto,
                 fontStyle = FontStyle.Normal,
                 fontWeight = FontWeight(400),

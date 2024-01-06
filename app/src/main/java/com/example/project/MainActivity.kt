@@ -27,6 +27,7 @@ import androidx.navigation.navArgument
 import com.example.project.auth.GoogleAuthUiClient
 import com.example.project.auth.SignInViewModel
 import com.example.project.compose.screens.AboutCollegeScreen
+import com.example.project.compose.screens.AdministrationScreen
 import com.example.project.compose.screens.DetailNewsScreen
 import com.example.project.compose.screens.HomepageScreen
 import com.example.project.compose.screens.ListAllLinksScreen
@@ -34,6 +35,7 @@ import com.example.project.compose.screens.ProfilePageScreen
 import com.example.project.compose.screens.SettingsPageScreen
 import com.example.project.navigation.NavigationItem
 import com.example.project.ui.theme.ProjectTheme
+import com.example.project.utilities.parseListAdministration
 import com.example.project.utilities.parseListNews
 import com.google.android.gms.auth.api.identity.Identity
 import kotlinx.coroutines.launch
@@ -65,6 +67,7 @@ class MainActivity : ComponentActivity() {
 
             val navController: NavHostController = rememberNavController()
             val newsList = parseListNews(LocalContext.current, "simpleView.news")
+            val administrationList = parseListAdministration(LocalContext.current, "simpleView.administration")
 
             ProjectTheme {
                 NavHost(
@@ -173,6 +176,16 @@ class MainActivity : ComponentActivity() {
                     //about college
                     composable(NavigationItem.AboutCollege.route) {
                         AboutCollegeScreen(
+                            onBackClick = {
+                                navController.popBackStack()
+                            }
+                        )
+                    }
+
+                    composable(NavigationItem.ListAdministration.route) {
+                        AdministrationScreen(
+                            navController = navController,
+                            administrationList = administrationList,
                             onBackClick = {
                                 navController.popBackStack()
                             }

@@ -1,6 +1,5 @@
 package com.example.project.compose.screens
 
-import android.annotation.SuppressLint
 import android.content.Context
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -34,7 +33,6 @@ import com.example.project.navigation.NavigationItem
 import com.example.project.ui.theme.Roboto
 import java.util.UUID
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun ListAllLinksScreen(
     context: Context,
@@ -45,8 +43,9 @@ fun ListAllLinksScreen(
     val uuid = UUID.randomUUID()
 
     val listAllLinks = listOf(
-        Links(id = uuid.toString(), text = context.getString(R.string.link_about_college),  route = NavigationItem.AboutCollege.route),
-        Links(id = uuid.toString(), text = context.getString(R.string.link_abiturient), route = NavigationItem.AboutCollege.route),
+        Links(id = uuid.toString(), text = context.getString(R.string.link_college_administration),  route = NavigationItem.ListAdministration.route),
+        Links(id = uuid.toString(), text = context.getString(R.string.link_contacts),  route = NavigationItem.AboutCollege.route),
+        Links(id = uuid.toString(), text = context.getString(R.string.link_applicant), route = NavigationItem.AboutCollege.route),
         Links(id = uuid.toString(), text = context.getString(R.string.link_schedule_week_teenagers), route = NavigationItem.AboutCollege.route),
         Links(id = uuid.toString(), text = context.getString(R.string.link_schedule_day_teenagers), route = NavigationItem.AboutCollege.route),
         Links(id = uuid.toString(), text = context.getString(R.string.link_schedule_week_teachers), route = NavigationItem.AboutCollege.route),
@@ -97,6 +96,7 @@ fun ListAllLinksScreen(
                                     fontWeight = FontWeight(500),
                                     modifier = Modifier
                                         .align(Alignment.CenterStart)
+                                        .padding(it)
                                 )
                             }
                         }

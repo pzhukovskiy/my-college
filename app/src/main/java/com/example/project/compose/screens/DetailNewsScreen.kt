@@ -17,7 +17,7 @@ import com.example.project.compose.widgets.StaticHeaderWidget
 import com.example.project.data.news.NewsInfo
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter", "QueryPermissionsNeeded")
+@SuppressLint("QueryPermissionsNeeded")
 @Composable
 fun DetailNewsScreen(
     news: NewsInfo,
