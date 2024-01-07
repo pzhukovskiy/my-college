@@ -25,9 +25,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.project.R
 import com.example.project.ui.theme.PrimaryBlue
 import com.example.project.ui.theme.Roboto
 
@@ -50,7 +52,9 @@ fun TelephoneButtonWidget(
                 if (intent.resolveActivity(context.packageManager) != null) {
                     context.startActivity(intent)
                 } else {
-                    Toast.makeText(context, "Невозможно открыть приложение", Toast.LENGTH_LONG).show()
+                    Toast
+                        .makeText(context, "Невозможно открыть приложение", Toast.LENGTH_LONG)
+                        .show()
                 }
             },
     ) {
@@ -67,7 +71,7 @@ fun TelephoneButtonWidget(
             )
             Spacer(modifier = Modifier.width(ButtonDefaults.IconSize / 4))
             Text(
-                text = "Позвонить",
+                text = stringResource(id = R.string.telephone),
                 fontFamily = Roboto,
                 fontStyle = FontStyle.Normal,
                 fontWeight = FontWeight(400),

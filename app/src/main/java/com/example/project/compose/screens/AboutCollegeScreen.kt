@@ -7,6 +7,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import com.example.project.R
 import com.example.project.compose.widgets.StaticHeaderWidget
 
@@ -18,7 +19,7 @@ fun AboutCollegeScreen(
         content = { paddingValues ->
             Column {
                 StaticHeaderWidget(
-                    text = "О колледже",
+                    text = stringResource(id = R.string.link_about_college),
                     imagePainter = painterResource(id = R.drawable.dark_gray_background_with_polygonal_forms_vector),
                     onBackClick = {
                         onBackClick()

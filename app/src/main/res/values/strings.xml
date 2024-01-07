@@ -9,6 +9,7 @@
     <string name="profile">Профиль</string>
 
     <string name="error_open_app">Невозможно открыть приложение</string>
+    <string name="telephone">Позвонить</string>
     <string name="write_mail">Написать на почту</string>
     <string name="mail_address">test_test@mail.test</string>
     <string name="mail_subject">Тема письма</string>
@@ -38,6 +39,18 @@
     <string name="administration">Администрация колледжа</string>
     <string name="administration_position">Должность:</string>
     <string name="administration_detail_info">Читать далее...</string>
+
+    <string name="kazinca">Учебный корпус по ул. Казинца, 91</string>
+    <string name="knorina">Учебный корпус по ул. Кнорина, 14</string>
+
+    <string name="director">Директор</string>
+    <string name="priemnaya">Приемная</string>
+
+    <string name="director_name">Козел Георгий Владимирович</string>
+    <string name="priemnaya_name">Кислухина Светлана Анатольевна</string>
+
+    <string name="director_telephone">374 11 62</string>
+    <string name="priemnaya_telephone">374 11 62</string>
 
     <string name="web_client_id">788633020834-m64n15oknbing4u404mljlje7k1q02ug.apps.googleusercontent.com</string>
 </resources>

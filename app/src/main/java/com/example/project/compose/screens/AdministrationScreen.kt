@@ -1,6 +1,7 @@
 package com.example.project.compose.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -30,6 +31,7 @@ import coil.compose.AsyncImage
 import com.example.project.R
 import com.example.project.compose.widgets.StaticHeaderWidget
 import com.example.project.data.administration.AdministrationInfo
+import com.example.project.navigation.NavigationItem
 import com.example.project.ui.theme.PrimaryBlue
 import com.example.project.ui.theme.Roboto
 
@@ -56,14 +58,14 @@ fun AdministrationScreen(
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .height(140.dp)
+                                .height(180.dp)
                                 .padding(horizontal = 12.dp, vertical = 4.dp)
                         ) {
                             Row {
                                 Box(
                                     modifier = Modifier
                                         .weight(0.5f)
-                                        .height(140.dp)
+                                        .height(180.dp)
                                 ) {
                                     AsyncImage(
                                         model = it.fields.image,
@@ -76,7 +78,7 @@ fun AdministrationScreen(
                                 Box(
                                     modifier = Modifier
                                         .weight(1f)
-                                        .height(140.dp)
+                                        .height(180.dp)
                                 ) {
                                     Column {
                                         Text(
@@ -100,18 +102,21 @@ fun AdministrationScreen(
                                         Box(
                                             modifier = Modifier
                                                 .fillMaxSize()
-                                                .padding(horizontal = 12.dp),
+                                                .padding(horizontal = 18.dp),
                                             contentAlignment = Alignment.Center
                                         ) {
                                             Box(modifier = Modifier
                                                 .background(Color(PrimaryBlue.toArgb()))
-                                                .height(40.dp)
-                                                .fillMaxWidth(),
+                                                .height(30.dp)
+                                                .fillMaxWidth()
+                                                .clickable {
+                                                       navController.navigate("${NavigationItem.DetailAdministration.route}/${it.pk}")
+                                                },
                                                 contentAlignment = Alignment.Center
                                             ) {
                                                 Text(
                                                     text = stringResource(id = R.string.administration_detail_info),
-                                                    style = MaterialTheme.typography.body1,
+                                                    style = MaterialTheme.typography.body2,
                                                     color = Color.White,
                                                     fontFamily = Roboto,
                                                     fontStyle = FontStyle.Normal,

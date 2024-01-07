@@ -28,6 +28,8 @@ import com.example.project.auth.GoogleAuthUiClient
 import com.example.project.auth.SignInViewModel
 import com.example.project.compose.screens.AboutCollegeScreen
 import com.example.project.compose.screens.AdministrationScreen
+import com.example.project.compose.screens.ContactsPageScreen
+import com.example.project.compose.screens.DetailAdministrationScreen
 import com.example.project.compose.screens.DetailNewsScreen
 import com.example.project.compose.screens.HomepageScreen
 import com.example.project.compose.screens.ListAllLinksScreen
@@ -73,7 +75,7 @@ class MainActivity : ComponentActivity() {
             ProjectTheme {
                 NavHost(
                     navController = navController,
-                    startDestination = NavigationItem.RegistrationPage.route
+                    startDestination = NavigationItem.Homepage.route
                 ) {
 
                     //homepage
@@ -189,10 +191,36 @@ class MainActivity : ComponentActivity() {
                         )
                     }
 
+                    //list all administration
                     composable(NavigationItem.ListAdministration.route) {
                         AdministrationScreen(
                             navController = navController,
                             administrationList = administrationList,
+                            onBackClick = {
+                                navController.popBackStack()
+                            }
+                        )
+                    }
+
+                    //information about administrator
+                    composable("${NavigationItem.DetailAdministration.route}/{id}",
+                        arguments = listOf(navArgument("id") { type = NavType.IntType })
+                    ) { backStackEntry ->
+                        val itemID = backStackEntry.arguments?.getInt("id")
+                        val selectedItem = administrationList.find { it.pk == itemID }
+                        selectedItem?.let {
+                            DetailAdministrationScreen(
+                                administrator = it,
+                                onBackClick = {
+                                    navController.popBackStack()
+                                }
+                            )
+                        }
+                    }
+
+                    //contacts
+                    composable(NavigationItem.ContactsPage.route) {
+                        ContactsPageScreen(
                             onBackClick = {
                                 navController.popBackStack()
                             }
