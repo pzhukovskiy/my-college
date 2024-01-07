@@ -83,12 +83,6 @@ dependencies {
     kapt 'androidx.hilt:hilt-compiler:1.0.0'
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
 
-    //google maps
-    implementation 'com.google.maps.android:maps-compose:2.11.5'
-    implementation 'com.google.android.gms:play-services-maps:18.1.0'
-    implementation 'com.google.android.gms:play-services-location:21.0.1'
-    implementation 'com.google.maps.android:android-maps-utils:3.4.0'
-
     //compose
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
