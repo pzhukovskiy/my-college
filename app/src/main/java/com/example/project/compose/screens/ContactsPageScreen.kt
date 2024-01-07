@@ -1,17 +1,13 @@
 package com.example.project.compose.screens
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -39,7 +35,6 @@ fun ContactsPageScreen(
 ) {
 
     val uuid = UUID.randomUUID()
-    val scrollState = rememberScrollState()
 
     val contactsListKazinca = listOf(
         Contacts(
