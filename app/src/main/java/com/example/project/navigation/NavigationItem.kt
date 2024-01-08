@@ -12,4 +12,5 @@ sealed class NavigationItem(val route: String) {
     object ListAdministration : NavigationItem("ListAdministration")//ListAdministrationScreen
     object DetailAdministration : NavigationItem("DetailAdministration")//DetailAdministrationScreen
     object ContactsPage : NavigationItem("ContactsPage")//ContactsPageScreen
+    object TestPage : NavigationItem("TestPage")//TestScreen
 }

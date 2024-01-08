@@ -11,8 +11,11 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.produceState
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -36,10 +39,16 @@ import com.example.project.compose.screens.ListAllLinksScreen
 import com.example.project.compose.screens.ProfilePageScreen
 import com.example.project.compose.screens.RegistrationPageScreen
 import com.example.project.compose.screens.SettingsPageScreen
+import com.example.project.compose.screens.TestScreen
+import com.example.project.helper.ConnectionStatus
+import com.example.project.helper.currentConnectivityStatus
+import com.example.project.helper.observeConnectivityAsFlow
 import com.example.project.navigation.NavigationItem
+import com.example.project.repository.PhotoRepositoryImplementation
 import com.example.project.ui.theme.ProjectTheme
 import com.example.project.utilities.parseListAdministration
 import com.example.project.utilities.parseListNews
+import com.example.project.viewmodels.PhotoViewModel
 import com.google.android.gms.auth.api.identity.Identity
 import kotlinx.coroutines.launch
 
@@ -56,7 +65,16 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window,false)
+
         setContent {
+            @Composable
+            fun connectivityStatus(): State<ConnectionStatus> {
+                val context = LocalContext.current
+
+                return produceState(initialValue = context.currentConnectivityStatus) {
+                    context.observeConnectivityAsFlow().collect {value = it}
+                }
+            }
 
             //notifications
             val notificationChannel= NotificationChannel(
@@ -72,11 +90,16 @@ class MainActivity : ComponentActivity() {
             val newsList = parseListNews(LocalContext.current, "simpleView.news")
             val administrationList = parseListAdministration(LocalContext.current, "simpleView.administration")
 
+            val connection by connectivityStatus()
+            val isConnected = connection === ConnectionStatus.Available
+
             ProjectTheme {
                 NavHost(
                     navController = navController,
                     startDestination = NavigationItem.Homepage.route
                 ) {
+
+                    val photoViewModel = PhotoViewModel(PhotoRepositoryImplementation(), applicationContext)
 
                     //homepage
                     composable(NavigationItem.Homepage.route) {
@@ -176,7 +199,7 @@ class MainActivity : ComponentActivity() {
                                 lifecycleScope.launch {
                                     googleAuthUiClient.signOut()
                                     Toast.makeText(applicationContext, "Успешно вышли", Toast.LENGTH_LONG).show()
-                                    navController.navigate(NavigationItem.Homepage.route)
+                                    navController.navigate(NavigationItem.RegistrationPage.route)
                                 }
                             }
                         )
@@ -224,6 +247,13 @@ class MainActivity : ComponentActivity() {
                             onBackClick = {
                                 navController.popBackStack()
                             }
+                        )
+                    }
+
+                    //test screen
+                    composable(NavigationItem.TestPage.route) {
+                        TestScreen(
+                            viewModel = photoViewModel
                         )
                     }
                 }

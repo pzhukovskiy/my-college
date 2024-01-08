@@ -19,6 +19,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.project.auth.UserData
 import com.example.project.ui.theme.Roboto
@@ -55,8 +56,8 @@ fun ProfilePageScreen(
             )
             Spacer(modifier = Modifier.height(16.dp))
         }
-//        Button(onClick = onSignOut) {
-//            Text(text = "Выйти")
-//        }
+        Button(onClick = onSignOut) {
+            Text(text = "Выйти")
+        }
     }
 }
