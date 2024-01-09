@@ -44,6 +44,7 @@ fun ListAllLinksScreen(
 
     val listAllLinks = listOf(
         Links(id = uuid.toString(), text = context.getString(R.string.link_college_administration),  route = NavigationItem.ListAdministration.route),
+        Links(id = uuid.toString(), text = context.getString(R.string.link_college_teachers),  route = NavigationItem.ListTeachers.route),
         Links(id = uuid.toString(), text = context.getString(R.string.link_contacts),  route = NavigationItem.ContactsPage.route),
         Links(id = uuid.toString(), text = context.getString(R.string.link_applicant), route = NavigationItem.AboutCollege.route),
         Links(id = uuid.toString(), text = context.getString(R.string.link_schedule_week_teenagers), route = NavigationItem.AboutCollege.route),

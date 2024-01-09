@@ -5,42 +5,28 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.platform.LocalTextInputService
-import androidx.compose.ui.platform.LocalUriHandler
-import androidx.compose.ui.platform.LocalView
-import androidx.compose.ui.platform.LocalView
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import coil.compose.rememberImagePainter
-import com.example.project.R
-import com.example.project.viewmodels.PhotoViewModel
+import com.example.project.viewmodels.TeacherViewModel
 
 @Composable
 fun TestScreen(
-    viewModel: PhotoViewModel
+    viewModel: TeacherViewModel
 ) {
     var query by remember { mutableStateOf("") }
     var isRefreshing by remember { mutableStateOf(false) }
 
     LaunchedEffect(key1 = Unit) {
         if (viewModel.errorMessage.isBlank()) {
-            viewModel.getPhoto()
+            viewModel.getTeacher()
         }
     }
 
@@ -54,7 +40,7 @@ fun TestScreen(
                     value = query,
                     onValueChange = {
                         query = it
-                        viewModel.filterPhotosByPhotographer(it)
+                        viewModel.filterTeacherByFIO(it)
                     },
                     label = { Text("Search") },
                     modifier = Modifier
@@ -62,10 +48,10 @@ fun TestScreen(
                         .fillMaxWidth(),
                 )
                 LazyColumn(content = {
-                    items(viewModel.filteredPhotoList) { photo ->
+                    items(viewModel.filteredTeacherList) { teacher ->
                         AsyncImage(
-                            model = photo.src.original,
-                            contentDescription = photo.photographer,
+                            model = teacher.image,
+                            contentDescription = teacher.last_name,
                             modifier = Modifier
                                 .fillMaxSize()
                                 .clip(RoundedCornerShape(16.dp))
@@ -84,32 +70,6 @@ fun TestScreen(
                     viewModel.fetchData()
                 }
             }
-        }
-    }
-}
-
-
-@Composable
-fun ConnectionErrorComponent(onRetry: () -> Unit) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = "No internet connection",
-            color = Color.Gray,
-            modifier = Modifier.padding(bottom = 16.dp)
-        )
-        Button(
-            onClick = onRetry,
-            modifier = Modifier.padding(8.dp)
-        ) {
-            Icon(Icons.Default.Refresh, contentDescription = null)
-            Spacer(modifier = Modifier.width(8.dp))
-            Text(text = "Retry")
         }
     }
 }

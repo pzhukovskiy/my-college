@@ -25,22 +25,22 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
-import com.example.project.data.news.NewsInfo
+import com.example.project.data.news.News
 import com.example.project.navigation.NavigationItem
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun PhotoSliderWidget(
     navController: NavHostController,
-    newsList: List<NewsInfo>,
+    newsList: List<News>,
     pagerState: PagerState,
 ) {
     val visibleNewsCount = 3
 
     if (newsList.size >= visibleNewsCount) {
         val visibleNews = newsList.takeLast(visibleNewsCount).reversed()
-        val images = visibleNews.map { it.fields.image }
-        val pk = visibleNews.map { it.pk }
+        val images = visibleNews.map { it.image }
+        val pk = visibleNews.map { it.id }
 
         Box(
             modifier = Modifier

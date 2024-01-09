@@ -12,15 +12,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import com.example.project.R
-import com.example.project.compose.widgets.SendNotificationWidget
 import com.example.project.compose.widgets.StaticHeaderWidget
-import com.example.project.data.news.NewsInfo
+import com.example.project.data.news.News
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @SuppressLint("QueryPermissionsNeeded")
 @Composable
 fun DetailNewsScreen(
-    news: NewsInfo,
+    news: News,
     onBackClick: () -> Unit
 ) {
 
@@ -32,14 +31,14 @@ fun DetailNewsScreen(
             .verticalScroll(scrollState)
     ) {
         StaticHeaderWidget(
-            text = news.fields.title,
+            text = news.title,
             imagePainter = painterResource(id = R.drawable.dark_gray_background_with_polygonal_forms_vector),
             onBackClick = onBackClick
         )
 
-        Text(text = news.fields.description)
+        Text(text = news.description)
 
         //Build only with TIRAMISU SDK
-        SendNotificationWidget()
+//        SendNotificationWidget()
     }
 }

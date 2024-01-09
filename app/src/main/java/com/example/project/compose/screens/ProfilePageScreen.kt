@@ -56,8 +56,8 @@ fun ProfilePageScreen(
             )
             Spacer(modifier = Modifier.height(16.dp))
         }
-        Button(onClick = onSignOut) {
-            Text(text = "Выйти")
-        }
+//        Button(onClick = onSignOut) {
+//            Text(text = "Выйти")
+//        }
     }
 }

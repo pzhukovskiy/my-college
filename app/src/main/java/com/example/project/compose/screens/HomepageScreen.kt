@@ -10,11 +10,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -29,16 +26,30 @@ import com.example.project.compose.widgets.BottomBarCustomWidget
 import com.example.project.compose.widgets.InformationAboutCollegeWidget
 import com.example.project.compose.widgets.PhotoSliderWidget
 import com.example.project.compose.widgets.ScheduleSelectButtonWidget
-import com.example.project.data.news.NewsInfo
 import androidx.activity.OnBackPressedDispatcherOwner
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import com.example.project.compose.widgets.StaticHeaderWidget
+import com.example.project.viewmodels.NewsViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomepageScreen(
     navController: NavHostController,
-    newsList: List<NewsInfo>,
+    viewModel: NewsViewModel,
     userData: UserData?
 ) {
+
+    var isRefreshing by remember { mutableStateOf(false) }
+
+    LaunchedEffect(key1 = Unit) {
+        if (viewModel.errorMessage.isBlank()) {
+            viewModel.getNews()
+        }
+    }
 
     val scrollState = rememberScrollState()
     val pagerState = rememberPagerState()
@@ -68,40 +79,39 @@ fun HomepageScreen(
         }
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(scrollState)
-    ) {
+    if (viewModel.errorMessage.isBlank()) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(scrollState)
+        ) {
 
-        PhotoSliderWidget(navController = navController, newsList = newsList, pagerState = pagerState)
 
-        ScheduleSelectButtonWidget()
+            PhotoSliderWidget(navController = navController, newsList = viewModel.newsList, pagerState = pagerState)
 
-//        Text(
-//            text = "fjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasj",
-//            modifier = Modifier.padding(12.dp),
-//            style = MaterialTheme.typography.h6
-//        )
-//
-//        Text(
-//            text = "fjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasjfjsalfjaslfjaslfasj",
-//            modifier = Modifier.padding(horizontal = 12.dp, vertical = 4.dp),
-//            style = MaterialTheme.typography.body1
-//        )
+            ScheduleSelectButtonWidget()
 
-        AdminLinksWidget()
+            AdminLinksWidget()
 
-        InformationAboutCollegeWidget(context = LocalContext.current)
+            InformationAboutCollegeWidget(context = LocalContext.current)
 
-        BottomBarCustomWidget(navController = navController, userData = userData)
+            BottomBarCustomWidget(navController = navController, userData = userData)
 
-        Spacer(modifier = Modifier.padding(25.dp))
+            Spacer(modifier = Modifier.padding(25.dp))
+        }
+
+        AnimatedHeaderWidget(
+            imagePainter = painterResource(id = R.drawable.dark_gray_background_with_polygonal_forms_vector),
+            text = stringResource(R.string.main_page),
+            scrollState = scrollState
+        )
     }
-
-    AnimatedHeaderWidget(
-        imagePainter = painterResource(id = R.drawable.dark_gray_background_with_polygonal_forms_vector),
-        text = stringResource(R.string.main_page),
-        scrollState = scrollState
-    )
+    else {
+        ConnectionErrorComponent {
+            if (viewModel.isConnected()) {
+                isRefreshing = true
+                viewModel.fetchData()
+            }
+        }
+    }
 }

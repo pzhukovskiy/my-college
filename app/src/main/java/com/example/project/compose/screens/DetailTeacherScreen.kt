@@ -18,11 +18,11 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.project.R
 import com.example.project.compose.widgets.StaticHeaderWidget
-import com.example.project.data.administrators.Administrator
+import com.example.project.data.teachers.Teacher
 
 @Composable
-fun DetailAdministrationScreen(
-    administrator: Administrator,
+fun DetailTeacherScreen(
+    teacher: Teacher,
     onBackClick: () -> Unit
 ) {
     val scrollState = rememberScrollState()
@@ -36,7 +36,7 @@ fun DetailAdministrationScreen(
             ) {
 
                 StaticHeaderWidget(
-                    text = "${administrator.middle_name} ${administrator.first_name[0]}. ${administrator.last_name[0]}.",
+                    text = "${teacher.middle_name} ${teacher.first_name[0]}. ${teacher.last_name[0]}.",
                     imagePainter = painterResource(id = R.drawable.dark_gray_background_with_polygonal_forms_vector),
                     onBackClick = {
                         onBackClick()
@@ -49,16 +49,16 @@ fun DetailAdministrationScreen(
                         .height(450.dp)
                 ) {
                     AsyncImage(
-                        model = administrator.image,
-                        contentDescription = administrator.toString(),
+                        model = teacher.image,
+                        contentDescription = teacher.toString(),
                         modifier = Modifier
                             .fillMaxSize(),
                         contentScale = ContentScale.Crop
                     )
                 }
 
-                Text(text = administrator.description, modifier = Modifier.padding(horizontal = 4.dp))
-                Text(text = administrator.second_description, modifier = Modifier.padding(horizontal = 4.dp))
+                Text(text = teacher.description, modifier = Modifier.padding(horizontal = 4.dp))
+                Text(text = teacher.room.room, modifier = Modifier.padding(horizontal = 4.dp))
                 Spacer(modifier = Modifier.height(45.dp))
             }
         }

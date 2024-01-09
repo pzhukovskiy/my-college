@@ -38,12 +38,12 @@ import com.example.project.compose.widgets.StaticHeaderWidget
 import com.example.project.navigation.NavigationItem
 import com.example.project.ui.theme.PrimaryBlue
 import com.example.project.ui.theme.Roboto
-import com.example.project.viewmodels.AdministratorViewModel
+import com.example.project.viewmodels.TeacherViewModel
 
 @Composable
-fun AdministrationScreen(
+fun TeacherScreen(
     navController: NavHostController,
-    viewModel: AdministratorViewModel,
+    viewModel: TeacherViewModel,
     onBackClick: () -> Unit
 ) {
 
@@ -51,7 +51,7 @@ fun AdministrationScreen(
 
     LaunchedEffect(key1 = Unit) {
         if (viewModel.errorMessage.isBlank()) {
-            viewModel.getAdministrator()
+            viewModel.getTeacher()
         }
     }
 
@@ -60,7 +60,7 @@ fun AdministrationScreen(
             if (viewModel.errorMessage.isBlank()) {
                 Column {
                     StaticHeaderWidget(
-                        text = stringResource(id = R.string.administration),
+                        text = "Педагогический состав",
                         imagePainter = painterResource(id = R.drawable.dark_gray_background_with_polygonal_forms_vector),
                         onBackClick = {
                             onBackClick()
@@ -68,7 +68,7 @@ fun AdministrationScreen(
                     )
 
                     LazyColumn(content = {
-                        items(viewModel.administratorList) { administrator ->
+                        items(viewModel.teachersList) { teacher ->
                             Box(
                                 modifier = Modifier
                                     .fillMaxWidth()
@@ -82,8 +82,8 @@ fun AdministrationScreen(
                                             .height(180.dp)
                                     ) {
                                         AsyncImage(
-                                            model = administrator.image,
-                                            contentDescription = administrator.toString(),
+                                            model = teacher.image,
+                                            contentDescription = teacher.toString(),
                                             modifier = Modifier
                                                 .fillMaxSize(),
                                             contentScale = ContentScale.Crop
@@ -96,7 +96,7 @@ fun AdministrationScreen(
                                     ) {
                                         Column {
                                             Text(
-                                                text = "${administrator.middle_name} ${administrator.first_name} ${administrator.last_name}",
+                                                text = "${teacher.middle_name} ${teacher.first_name} ${teacher.last_name}",
                                                 style = MaterialTheme.typography.body1,
                                                 color = Color.Black,
                                                 fontFamily = Roboto,
@@ -105,7 +105,7 @@ fun AdministrationScreen(
                                                 modifier = Modifier.padding(start = 4.dp)
                                             )
                                             Text(
-                                                text = "${stringResource(id = R.string.administration_position)} ${administrator.position}",
+                                                text = "Кабинет: ${teacher.room.room}",
                                                 style = MaterialTheme.typography.body2,
                                                 color = Color.Black,
                                                 fontFamily = Roboto,
@@ -124,7 +124,7 @@ fun AdministrationScreen(
                                                     .height(30.dp)
                                                     .fillMaxWidth()
                                                     .clickable {
-                                                        navController.navigate("${NavigationItem.DetailAdministration.route}/${administrator.id}")
+                                                        navController.navigate("${NavigationItem.DetailTeacher.route}/${teacher.id}")
                                                     },
                                                     contentAlignment = Alignment.Center
                                                 ) {

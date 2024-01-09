@@ -34,21 +34,24 @@ import com.example.project.compose.screens.AdministrationScreen
 import com.example.project.compose.screens.ContactsPageScreen
 import com.example.project.compose.screens.DetailAdministrationScreen
 import com.example.project.compose.screens.DetailNewsScreen
+import com.example.project.compose.screens.DetailTeacherScreen
 import com.example.project.compose.screens.HomepageScreen
 import com.example.project.compose.screens.ListAllLinksScreen
 import com.example.project.compose.screens.ProfilePageScreen
 import com.example.project.compose.screens.RegistrationPageScreen
 import com.example.project.compose.screens.SettingsPageScreen
-import com.example.project.compose.screens.TestScreen
+import com.example.project.compose.screens.TeacherScreen
 import com.example.project.helper.ConnectionStatus
 import com.example.project.helper.currentConnectivityStatus
 import com.example.project.helper.observeConnectivityAsFlow
 import com.example.project.navigation.NavigationItem
-import com.example.project.repository.PhotoRepositoryImplementation
+import com.example.project.repository.AdministratorRepositoryImplementation
+import com.example.project.repository.NewsRepositoryImplementation
+import com.example.project.repository.TeacherRepositoryImplementation
 import com.example.project.ui.theme.ProjectTheme
-import com.example.project.utilities.parseListAdministration
-import com.example.project.utilities.parseListNews
-import com.example.project.viewmodels.PhotoViewModel
+import com.example.project.viewmodels.AdministratorViewModel
+import com.example.project.viewmodels.NewsViewModel
+import com.example.project.viewmodels.TeacherViewModel
 import com.google.android.gms.auth.api.identity.Identity
 import kotlinx.coroutines.launch
 
@@ -87,8 +90,6 @@ class MainActivity : ComponentActivity() {
             //
 
             val navController: NavHostController = rememberNavController()
-            val newsList = parseListNews(LocalContext.current, "simpleView.news")
-            val administrationList = parseListAdministration(LocalContext.current, "simpleView.administration")
 
             val connection by connectivityStatus()
             val isConnected = connection === ConnectionStatus.Available
@@ -99,13 +100,15 @@ class MainActivity : ComponentActivity() {
                     startDestination = NavigationItem.Homepage.route
                 ) {
 
-                    val photoViewModel = PhotoViewModel(PhotoRepositoryImplementation(), applicationContext)
+                    val teacherViewModel = TeacherViewModel(TeacherRepositoryImplementation(), applicationContext)
+                    val administratorViewModel = AdministratorViewModel(AdministratorRepositoryImplementation(), applicationContext)
+                    val newsViewModel = NewsViewModel(NewsRepositoryImplementation(), applicationContext)
 
                     //homepage
                     composable(NavigationItem.Homepage.route) {
                             HomepageScreen(
                                 navController = navController,
-                                newsList = newsList,
+                                viewModel = newsViewModel,
                                 userData = googleAuthUiClient.getSignedInUser()
                             )
                     }
@@ -115,7 +118,7 @@ class MainActivity : ComponentActivity() {
                         arguments = listOf(navArgument("id") { type = NavType.IntType })
                     ) { backStackEntry ->
                         val itemID = backStackEntry.arguments?.getInt("id")
-                        val selectedItem = newsList.find { it.pk == itemID }
+                        val selectedItem = newsViewModel.newsList.find { it.id == itemID }
                         selectedItem?.let {
                             DetailNewsScreen(
                                 news = it,
@@ -218,7 +221,7 @@ class MainActivity : ComponentActivity() {
                     composable(NavigationItem.ListAdministration.route) {
                         AdministrationScreen(
                             navController = navController,
-                            administrationList = administrationList,
+                            viewModel = administratorViewModel,
                             onBackClick = {
                                 navController.popBackStack()
                             }
@@ -230,10 +233,37 @@ class MainActivity : ComponentActivity() {
                         arguments = listOf(navArgument("id") { type = NavType.IntType })
                     ) { backStackEntry ->
                         val itemID = backStackEntry.arguments?.getInt("id")
-                        val selectedItem = administrationList.find { it.pk == itemID }
+                        val selectedItem = administratorViewModel.administratorList.find { it.id == itemID }
                         selectedItem?.let {
                             DetailAdministrationScreen(
                                 administrator = it,
+                                onBackClick = {
+                                    navController.popBackStack()
+                                }
+                            )
+                        }
+                    }
+
+                    //list all teachers
+                    composable(NavigationItem.ListTeachers.route) {
+                        TeacherScreen(
+                            navController = navController,
+                            viewModel = teacherViewModel,
+                            onBackClick = {
+                                navController.popBackStack()
+                            }
+                        )
+                    }
+
+                    //information about teacher
+                    composable("${NavigationItem.DetailTeacher.route}/{id}",
+                        arguments = listOf(navArgument("id") { type = NavType.IntType })
+                    ) { backStackEntry ->
+                        val itemID = backStackEntry.arguments?.getInt("id")
+                        val selectedItem = teacherViewModel.teachersList.find { it.id == itemID }
+                        selectedItem?.let {
+                            DetailTeacherScreen(
+                                teacher = it,
                                 onBackClick = {
                                     navController.popBackStack()
                                 }
@@ -247,13 +277,6 @@ class MainActivity : ComponentActivity() {
                             onBackClick = {
                                 navController.popBackStack()
                             }
-                        )
-                    }
-
-                    //test screen
-                    composable(NavigationItem.TestPage.route) {
-                        TestScreen(
-                            viewModel = photoViewModel
                         )
                     }
                 }

@@ -11,24 +11,24 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.project.data.photo.Photo
-import com.example.project.repository.PhotoRepository
+import com.example.project.data.administrators.Administrator
+import com.example.project.repository.AdministratorRepository
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class PhotoViewModel(
-    private val imageRepository: PhotoRepository,
+class AdministratorViewModel(
+    private val administratorRepository: AdministratorRepository,
     private val context: Context
 ) : ViewModel() {
 
-    private val _photos = mutableStateListOf<Photo>()
-    private var _filteredPhotoList: List<Photo> by mutableStateOf(_photos)
+    private val _administrators = mutableStateListOf<Administrator>()
+    private var _filteredAdministratorList: List<Administrator> by mutableStateOf(_administrators)
     var errorMessage: String by mutableStateOf("")
-    val photoList: List<Photo>
-        get() = _photos
+    val administratorList: List<Administrator>
+        get() = _administrators
 
-    val filteredPhotoList: List<Photo>
-        get() = _filteredPhotoList
+    val filteredAdministratorList: List<Administrator>
+        get() = _filteredAdministratorList
 
     private var job: Job? = null
 
@@ -63,21 +63,22 @@ class PhotoViewModel(
     fun fetchData() {
         job = viewModelScope.launch {
             try {
-                imageRepository.fetchPhotos().collect { photos ->
-                    _photos.clear()
-                    _photos.addAll(photos)
+                administratorRepository.fetchAdministrators().collect { administrator ->
+                    _administrators.clear()
+                    _administrators.addAll(administrator)
                 }
             } catch (e: Exception) {
-                errorMessage = "Error fetching photos: ${e.message}"
+                errorMessage = "Error fetching: ${e.message}"
             }
         }
     }
 
-    fun filterPhotosByPhotographer(query: String) {
-        _filteredPhotoList = if (query.isNotBlank()) {
-            photoList.filter { it.photographer.contains(query, ignoreCase = true) }
-        } else {
-            photoList
+    fun filterAdministratorByFIO(query: String) {
+        _filteredAdministratorList = if (query.isNotBlank()) {
+            administratorList.filter { (it.first_name.contains(query, ignoreCase = true) || it.middle_name.contains(query, ignoreCase = true) || it.last_name.contains(query, ignoreCase = true)) }
+        }
+        else {
+            administratorList
         }
     }
 
@@ -86,7 +87,7 @@ class PhotoViewModel(
         super.onCleared()
     }
 
-    fun getPhoto(): List<Photo> {
-        return photoList
+    fun getAdministrator(): List<Administrator> {
+        return administratorList
     }
 }
