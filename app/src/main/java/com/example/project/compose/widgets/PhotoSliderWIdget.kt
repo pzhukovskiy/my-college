@@ -16,17 +16,24 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.project.data.news.News
 import com.example.project.navigation.NavigationItem
+import com.example.project.ui.theme.PrimaryBlue
+import com.example.project.ui.theme.Roboto
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -41,57 +48,109 @@ fun PhotoSliderWidget(
         val visibleNews = newsList.takeLast(visibleNewsCount).reversed()
         val images = visibleNews.map { it.image }
         val pk = visibleNews.map { it.id }
+        val title = visibleNews.map { it.title }
 
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(550.dp),
+                .height(50.dp)
+                .padding(horizontal = 12.dp, vertical = 4.dp),
             contentAlignment = Alignment.Center,
         ) {
-            HorizontalPager(
-                pageCount = visibleNews.size,
-                state = pagerState,
-                key = { pk[it] },
-                pageSize = PageSize.Fill
-            ) { index ->
-                AsyncImage(
-                    model = images[index],
-                    contentDescription = pk[index].toString(),
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .clickable {
-                            navController.navigate("${NavigationItem.DetailNews.route}/${pk[index]}")
-                        },
-                    contentScale = ContentScale.Crop
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "Новости колледжа",
+                    fontFamily = Roboto,
+                    fontStyle = FontStyle.Normal,
+                    fontWeight = FontWeight(700),
+                    style = MaterialTheme.typography.body2
+                )
+                Text(
+                    text = "Смотреть все",
+                    fontFamily = Roboto,
+                    color = Color(PrimaryBlue.toArgb()),
+                    fontStyle = FontStyle.Normal,
+                    fontWeight = FontWeight(400),
+                    style = MaterialTheme.typography.subtitle2,
+                    modifier = Modifier.clickable {
+                        navController.navigate(NavigationItem.ListAllNews.route)
+                    }
                 )
             }
-            Column(
-                modifier = Modifier
-                    .padding(top = 520.dp)
-            ) {
-                Box(
-                    modifier = Modifier
-                        .height(20.dp)
-                        .fillMaxWidth()
-                ) {
-                    Row(
+        }
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(230.dp)
+                .padding(horizontal = 12.dp),
+            contentAlignment = Alignment.Center,
+        ) {
+                HorizontalPager(
+                    pageCount = visibleNews.size,
+                    state = pagerState,
+                    key = { pk[it] },
+                    pageSize = PageSize.Fill
+                ) { index ->
+                    Column(
                         modifier = Modifier
-                            .height(20.dp)
-                            .fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Center
+                            .clickable {
+                                navController.navigate("${NavigationItem.DetailNews.route}/${pk[index]}")
+                            }
                     ) {
-                        repeat(images.size) {
-                            val color = if (pagerState.currentPage == it) Color.DarkGray else Color.LightGray
-                            Box(
+                        Box(
+                            modifier = Modifier
+                                .height(200.dp)
+                        ) {
+                            AsyncImage(
+                                model = images[index],
+                                contentDescription = pk[index].toString(),
                                 modifier = Modifier
-                                    .padding(2.dp)
-                                    .clip(CircleShape)
-                                    .background(color)
-                                    .size(12.dp)
+                                    .fillMaxSize(),
+                                contentScale = ContentScale.Crop
+                            )
+                        }
+                        Box(
+                            modifier = Modifier
+                                .height(30.dp)
+                                .fillMaxWidth(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = title[index],
+                                fontFamily = Roboto,
+                                color = Color.Black,
+                                fontStyle = FontStyle.Normal,
+                                fontWeight = FontWeight(500),
                             )
                         }
                     }
+                }
+        }
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(20.dp)
+                .padding(horizontal = 12.dp)
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxSize(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                repeat(images.size) {
+                    val color = if (pagerState.currentPage == it) Color(PrimaryBlue.toArgb()) else Color.LightGray
+                    Box(
+                        modifier = Modifier
+                            .padding(2.dp)
+                            .clip(CircleShape)
+                            .background(color)
+                            .size(8.dp)
+                    )
                 }
             }
         }

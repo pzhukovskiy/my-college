@@ -46,14 +46,10 @@ fun ListAllLinksScreen(
         Links(id = uuid.toString(), text = context.getString(R.string.link_college_administration),  route = NavigationItem.ListAdministration.route),
         Links(id = uuid.toString(), text = context.getString(R.string.link_college_teachers),  route = NavigationItem.ListTeachers.route),
         Links(id = uuid.toString(), text = context.getString(R.string.link_contacts),  route = NavigationItem.ContactsPage.route),
-        Links(id = uuid.toString(), text = context.getString(R.string.link_applicant), route = NavigationItem.AboutCollege.route),
-        Links(id = uuid.toString(), text = context.getString(R.string.link_schedule_week_teenagers), route = NavigationItem.AboutCollege.route),
-        Links(id = uuid.toString(), text = context.getString(R.string.link_schedule_day_teenagers), route = NavigationItem.AboutCollege.route),
-        Links(id = uuid.toString(), text = context.getString(R.string.link_schedule_week_teachers), route = NavigationItem.AboutCollege.route),
-        Links(id = uuid.toString(), text = context.getString(R.string.link_schedule_day_teachers), route = NavigationItem.AboutCollege.route),
-        Links(id = uuid.toString(), text = context.getString(R.string.link_calls), route = NavigationItem.AboutCollege.route),
-        Links(id = uuid.toString(), text = context.getString(R.string.link_exams), route = NavigationItem.AboutCollege.route),
-        Links(id = uuid.toString(), text = context.getString(R.string.link_courses), route = NavigationItem.AboutCollege.route)
+//        Links(id = uuid.toString(), text = context.getString(R.string.link_applicant), route = NavigationItem.AboutCollege.route),
+//        Links(id = uuid.toString(), text = context.getString(R.string.link_calls), route = NavigationItem.AboutCollege.route),
+//        Links(id = uuid.toString(), text = context.getString(R.string.link_exams), route = NavigationItem.AboutCollege.route),
+//        Links(id = uuid.toString(), text = context.getString(R.string.link_courses), route = NavigationItem.AboutCollege.route)
     )
 
     Scaffold(

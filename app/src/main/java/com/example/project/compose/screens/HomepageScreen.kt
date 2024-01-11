@@ -32,7 +32,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import com.example.project.compose.widgets.StaticHeaderWidget
+import com.example.project.compose.widgets.AboutCollegeWidget
+import com.example.project.repository.GroupsRepositoryImplementation
+import com.example.project.viewmodels.GroupsViewModel
 import com.example.project.viewmodels.NewsViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -57,24 +59,19 @@ fun HomepageScreen(
     val context = LocalContext.current as OnBackPressedDispatcherOwner
 
     DisposableEffect(context) {
-        // Registering onBackPressed callback
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                // Handle the back button press
                 if (pagerState.currentPage != 0) {
 
                 } else {
-                    // If on the first page, close the app
                     (context as? Activity)?.finish()
                 }
             }
         }
 
-        // Add the callback to the dispatcher
         context.onBackPressedDispatcher.addCallback(callback)
 
         onDispose {
-            // Remove the callback when the composable is disposed
             callback.remove()
         }
     }
@@ -86,10 +83,13 @@ fun HomepageScreen(
                 .verticalScroll(scrollState)
         ) {
 
+            AboutCollegeWidget(navController = navController)
 
             PhotoSliderWidget(navController = navController, newsList = viewModel.newsList, pagerState = pagerState)
 
-            ScheduleSelectButtonWidget()
+            ScheduleSelectButtonWidget(
+                navController = navController
+            )
 
             AdminLinksWidget()
 

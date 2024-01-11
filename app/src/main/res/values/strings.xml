@@ -13,33 +13,35 @@
     <string name="write_mail">Написать на почту</string>
     <string name="mail_address">test_test@mail.test</string>
     <string name="mail_subject">Тема письма</string>
-    <string name="mail_text_morning">Доброе утро, это текст сообщения, измените его</string>
-    <string name="mail_text_day">Добрый день, это текст сообщения, измените его</string>
-    <string name="mail_text_evening">Добрый вечер, это текст сообщения, измените его</string>
-    <string name="mail_text_night">Доброй ночи, это текст сообщения, измените его</string>
+    <string name="mail_text">Здраствуйте, это текст сообщения, измените его</string>
 
     <string name="schedule">Изменение расписания</string>
     <string name="schedule_new">Просмотрите новое расписание</string>
 
     <string name="college_name">© УО Минский государственный колледж цифровых технологий,</string>
     <string name="college_address">Адрес: 220108, Республика Беларусь, г. Минск, ул. Казинца, 91</string>
+    <string name="college_short_name">МГКЦТ</string>
 
     <string name="link_about_college">О колледже</string>
     <string name="link_college_administration">Администрация колледжа</string>
     <string name="link_college_teachers">Педагогический коллектив</string>
     <string name="link_contacts">Контакты</string>
     <string name="link_applicant">Абитуриентам</string>
-    <string name="link_schedule_week_teenagers">Расписание на неделю (обучающиеся)</string>
-    <string name="link_schedule_day_teenagers">Расписание на день (обучающиеся)</string>
-    <string name="link_schedule_week_teachers">Расписание на неделю (преподаватели)</string>
-    <string name="link_schedule_day_teachers">Расписание на день (преподаватели)</string>
+    <string name="link_schedule">Расписание</string>
+    <string name="link_schedule_day">Расписание на день</string>
+    <string name="link_schedule_week">Расписание на неделю</string>
     <string name="link_calls">Расписание звонков</string>
     <string name="link_exams">График экзаменов</string>
     <string name="link_courses">Платные курсы</string>
+    <string name="link_archive_news">Архив новостей</string>
 
     <string name="administration">Администрация колледжа</string>
     <string name="administration_position">Должность:</string>
     <string name="administration_detail_info">Читать далее...</string>
+    <string name="news_detail">Подробнее</string>
+
+    <string name="select_group">Выберите группу</string>
+    <string name="select_teacher">Выберите преподавателя</string>
 
     <string name="kazinca">Учебный корпус по ул. Казинца, 91</string>
     <string name="knorina">Учебный корпус по ул. Кнорина, 14</string>

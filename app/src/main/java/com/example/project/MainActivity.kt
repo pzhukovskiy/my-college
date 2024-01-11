@@ -36,7 +36,9 @@ import com.example.project.compose.screens.DetailAdministrationScreen
 import com.example.project.compose.screens.DetailNewsScreen
 import com.example.project.compose.screens.DetailTeacherScreen
 import com.example.project.compose.screens.HomepageScreen
+import com.example.project.compose.screens.LessonsScreen
 import com.example.project.compose.screens.ListAllLinksScreen
+import com.example.project.compose.screens.ListAllNewsScreen
 import com.example.project.compose.screens.ProfilePageScreen
 import com.example.project.compose.screens.RegistrationPageScreen
 import com.example.project.compose.screens.SettingsPageScreen
@@ -46,10 +48,12 @@ import com.example.project.helper.currentConnectivityStatus
 import com.example.project.helper.observeConnectivityAsFlow
 import com.example.project.navigation.NavigationItem
 import com.example.project.repository.AdministratorRepositoryImplementation
+import com.example.project.repository.LessonsRepositoryImplementation
 import com.example.project.repository.NewsRepositoryImplementation
 import com.example.project.repository.TeacherRepositoryImplementation
 import com.example.project.ui.theme.ProjectTheme
 import com.example.project.viewmodels.AdministratorViewModel
+import com.example.project.viewmodels.LessonsViewModel
 import com.example.project.viewmodels.NewsViewModel
 import com.example.project.viewmodels.TeacherViewModel
 import com.google.android.gms.auth.api.identity.Identity
@@ -97,12 +101,13 @@ class MainActivity : ComponentActivity() {
             ProjectTheme {
                 NavHost(
                     navController = navController,
-                    startDestination = NavigationItem.Homepage.route
+                    startDestination = NavigationItem.RegistrationPage.route
                 ) {
 
                     val teacherViewModel = TeacherViewModel(TeacherRepositoryImplementation(), applicationContext)
                     val administratorViewModel = AdministratorViewModel(AdministratorRepositoryImplementation(), applicationContext)
                     val newsViewModel = NewsViewModel(NewsRepositoryImplementation(), applicationContext)
+                    val lessonsViewModel = LessonsViewModel(LessonsRepositoryImplementation(), applicationContext)
 
                     //homepage
                     composable(NavigationItem.Homepage.route) {
@@ -127,6 +132,26 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
                         }
+                    }
+
+                    //lessons
+                    composable("${NavigationItem.LessonsScreen.route}") {
+                        LessonsScreen(
+                            viewModel = lessonsViewModel,
+                            navController = navController
+                        )
+                    }
+
+
+                    //list all news
+                    composable(NavigationItem.ListAllNews.route) {
+                        ListAllNewsScreen(
+                            viewModel = newsViewModel,
+                            navController = navController,
+                            onBackClick = {
+                                navController.popBackStack()
+                            }
+                        )
                     }
 
                     //list all links

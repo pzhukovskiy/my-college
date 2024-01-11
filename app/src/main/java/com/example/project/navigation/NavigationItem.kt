@@ -14,4 +14,5 @@ sealed class NavigationItem(val route: String) {
     object ContactsPage : NavigationItem("ContactsPage")//ContactsPageScreen
     object ListTeachers : NavigationItem("ListTeachers")//TeachersScreen
     object DetailTeacher : NavigationItem("DetailTeacher")//DetailTeacherScreen
+    object LessonsScreen : NavigationItem("Lessons")//LessonsScreen
 }
