@@ -11,7 +11,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.project.data.lessons.Lessons
-import com.example.project.repository.LessonsRepository
+import com.example.project.repository.lessons.LessonsRepository
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 

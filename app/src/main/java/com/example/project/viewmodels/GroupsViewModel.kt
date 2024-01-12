@@ -11,7 +11,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.project.data.group.Group
-import com.example.project.repository.GroupsRepository
+import com.example.project.repository.group.GroupsRepository
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 

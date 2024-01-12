@@ -29,28 +29,29 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.project.auth.GoogleAuthUiClient
 import com.example.project.auth.SignInViewModel
-import com.example.project.compose.screens.AboutCollegeScreen
-import com.example.project.compose.screens.AdministrationScreen
-import com.example.project.compose.screens.ContactsPageScreen
-import com.example.project.compose.screens.DetailAdministrationScreen
-import com.example.project.compose.screens.DetailNewsScreen
-import com.example.project.compose.screens.DetailTeacherScreen
-import com.example.project.compose.screens.HomepageScreen
-import com.example.project.compose.screens.LessonsScreen
-import com.example.project.compose.screens.ListAllLinksScreen
-import com.example.project.compose.screens.ListAllNewsScreen
-import com.example.project.compose.screens.ProfilePageScreen
-import com.example.project.compose.screens.RegistrationPageScreen
-import com.example.project.compose.screens.SettingsPageScreen
-import com.example.project.compose.screens.TeacherScreen
+import com.example.project.compose.screens.about_college.AboutCollegeScreen
+import com.example.project.compose.screens.administration.DetailAdministrationScreen
+import com.example.project.compose.screens.about_college.info_1966.Info1966
+import com.example.project.compose.screens.administration.AdministrationScreen
+import com.example.project.compose.screens.contacts.ContactsPageScreen
+import com.example.project.compose.screens.homePage.HomepageScreen
+import com.example.project.compose.screens.lessons.LessonsScreen
+import com.example.project.compose.screens.links.ListAllLinksScreen
+import com.example.project.compose.screens.news.DetailNewsScreen
+import com.example.project.compose.screens.news.ListAllNewsScreen
+import com.example.project.compose.screens.profile.ProfilePageScreen
+import com.example.project.compose.screens.registration.RegistrationPageScreen
+import com.example.project.compose.screens.settings.SettingsPageScreen
+import com.example.project.compose.screens.teachers.DetailTeacherScreen
+import com.example.project.compose.screens.teachers.TeacherScreen
 import com.example.project.helper.ConnectionStatus
 import com.example.project.helper.currentConnectivityStatus
 import com.example.project.helper.observeConnectivityAsFlow
 import com.example.project.navigation.NavigationItem
-import com.example.project.repository.AdministratorRepositoryImplementation
-import com.example.project.repository.LessonsRepositoryImplementation
-import com.example.project.repository.NewsRepositoryImplementation
-import com.example.project.repository.TeacherRepositoryImplementation
+import com.example.project.repository.administration.AdministratorRepositoryImplementation
+import com.example.project.repository.lessons.LessonsRepositoryImplementation
+import com.example.project.repository.news.NewsRepositoryImplementation
+import com.example.project.repository.teachers.TeacherRepositoryImplementation
 import com.example.project.ui.theme.ProjectTheme
 import com.example.project.viewmodels.AdministratorViewModel
 import com.example.project.viewmodels.LessonsViewModel
@@ -105,7 +106,8 @@ class MainActivity : ComponentActivity() {
                 ) {
 
                     val teacherViewModel = TeacherViewModel(TeacherRepositoryImplementation(), applicationContext)
-                    val administratorViewModel = AdministratorViewModel(AdministratorRepositoryImplementation(), applicationContext)
+                    val administratorViewModel = AdministratorViewModel(
+                        AdministratorRepositoryImplementation(), applicationContext)
                     val newsViewModel = NewsViewModel(NewsRepositoryImplementation(), applicationContext)
                     val lessonsViewModel = LessonsViewModel(LessonsRepositoryImplementation(), applicationContext)
 
@@ -135,7 +137,7 @@ class MainActivity : ComponentActivity() {
                     }
 
                     //lessons
-                    composable("${NavigationItem.LessonsScreen.route}") {
+                    composable(NavigationItem.LessonsScreen.route) {
                         LessonsScreen(
                             viewModel = lessonsViewModel,
                             navController = navController
@@ -229,6 +231,9 @@ class MainActivity : ComponentActivity() {
                                     Toast.makeText(applicationContext, "Успешно вышли", Toast.LENGTH_LONG).show()
                                     navController.navigate(NavigationItem.RegistrationPage.route)
                                 }
+                            },
+                            onBackClick = {
+                                navController.popBackStack()
                             }
                         )
                     }
@@ -236,6 +241,7 @@ class MainActivity : ComponentActivity() {
                     //about college
                     composable(NavigationItem.AboutCollege.route) {
                         AboutCollegeScreen(
+                            navController = navController,
                             onBackClick = {
                                 navController.popBackStack()
                             }
@@ -299,6 +305,15 @@ class MainActivity : ComponentActivity() {
                     //contacts
                     composable(NavigationItem.ContactsPage.route) {
                         ContactsPageScreen(
+                            onBackClick = {
+                                navController.popBackStack()
+                            }
+                        )
+                    }
+
+                    //1966
+                    composable(NavigationItem.Info1966.route) {
+                        Info1966(
                             onBackClick = {
                                 navController.popBackStack()
                             }

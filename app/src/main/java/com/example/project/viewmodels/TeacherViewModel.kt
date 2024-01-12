@@ -12,7 +12,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.project.data.teachers.Teacher
-import com.example.project.repository.TeacherRepository
+import com.example.project.repository.teachers.TeacherRepository
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
@@ -75,8 +75,7 @@ class TeacherViewModel(
 
     fun filterTeacherByFIO(query: String) {
         _filteredTeacherList = if (query.isNotBlank()) {
-            teachersList.filter { it.first_name.contains(query, ignoreCase = true)
-            }
+            teachersList.filter { (it.first_name.contains(query, ignoreCase = true)) || (it.last_name.contains(query, ignoreCase = true) || it.middle_name.contains(query, ignoreCase = true)) }
         }
         else {
             teachersList

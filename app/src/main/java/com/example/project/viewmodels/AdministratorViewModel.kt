@@ -12,7 +12,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.project.data.administrators.Administrator
-import com.example.project.repository.AdministratorRepository
+import com.example.project.repository.administration.AdministratorRepository
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 

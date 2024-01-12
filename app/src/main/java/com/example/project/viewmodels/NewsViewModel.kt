@@ -11,7 +11,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.project.data.news.News
-import com.example.project.repository.NewsRepository
+import com.example.project.repository.news.NewsRepository
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
