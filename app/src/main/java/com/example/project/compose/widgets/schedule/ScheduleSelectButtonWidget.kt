@@ -175,7 +175,7 @@ fun ScheduleSelectButtonWidget(
                                         )
                                         .show()
                                 } else {
-                                    navController.navigate(NavigationItem.LessonsScreen.route)
+                                    navController.navigate(NavigationItem.LessonsScreenDay.route)
                                 }
                             },
                         contentAlignment = Alignment.Center
@@ -203,9 +203,8 @@ fun ScheduleSelectButtonWidget(
                                             Toast.LENGTH_LONG
                                         )
                                         .show()
-                                }
-                                else {
-
+                                } else {
+                                    navController.navigate(NavigationItem.LessonsScreenWeek.route)
                                 }
                             },
                         contentAlignment = Alignment.Center

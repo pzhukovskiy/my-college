@@ -12,4 +12,11 @@ class LessonsRepositoryImplementation : LessonsRepository {
             emit(lesson)
         }
     }
+
+    override suspend fun fetchLessons(id: Int): Flow<List<Lessons>> {
+        return flow {
+            val lessons = ApiService.create().getLessons().filter { it.group.id == id }
+            emit(lessons)
+        }
+    }
 }

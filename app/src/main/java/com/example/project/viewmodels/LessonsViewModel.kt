@@ -60,12 +60,21 @@ class LessonsViewModel(
         }
     }
 
+    fun fetchLessons(id: Int) {
+        job = viewModelScope.launch {
+            try {
+                lessonsRepository.fetchLessons(id).collect {
+                    _lessons.clear()
+                    _lessons.addAll(it)
+                }
+            } catch (e: Exception) {
+                errorMessage = "Error fetching: ${e.message}"
+            }
+        }
+    }
+
     override fun onCleared() {
         job?.cancel()
         super.onCleared()
-    }
-
-    fun getLessons(): List<Lessons> {
-        return lessonsList
     }
 }

@@ -35,7 +35,8 @@ import com.example.project.compose.screens.about_college.info_1966.Info1966
 import com.example.project.compose.screens.administration.AdministrationScreen
 import com.example.project.compose.screens.contacts.ContactsPageScreen
 import com.example.project.compose.screens.homePage.HomepageScreen
-import com.example.project.compose.screens.lessons.LessonsScreen
+import com.example.project.compose.screens.lessons.LessonsScreenDay
+import com.example.project.compose.screens.lessons.LessonsScreenWeek
 import com.example.project.compose.screens.links.ListAllLinksScreen
 import com.example.project.compose.screens.news.DetailNewsScreen
 import com.example.project.compose.screens.news.ListAllNewsScreen
@@ -136,14 +137,21 @@ class MainActivity : ComponentActivity() {
                         }
                     }
 
-                    //lessons
-                    composable(NavigationItem.LessonsScreen.route) {
-                        LessonsScreen(
+                    //lessons day
+                    composable(NavigationItem.LessonsScreenDay.route) {
+                        LessonsScreenDay(
                             viewModel = lessonsViewModel,
                             navController = navController
                         )
                     }
 
+                    //lessons day
+                    composable(NavigationItem.LessonsScreenWeek.route) {
+                        LessonsScreenWeek(
+                            viewModel = lessonsViewModel,
+                            navController = navController
+                        )
+                    }
 
                     //list all news
                     composable(NavigationItem.ListAllNews.route) {

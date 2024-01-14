@@ -17,14 +17,14 @@ import androidx.navigation.NavController
 import com.example.project.viewmodels.LessonsViewModel
 
 @Composable
-fun LessonsScreen(
+fun LessonsScreenWeek(
     viewModel: LessonsViewModel,
     navController: NavController
 ) {
     LaunchedEffect(key1 = Unit) {
-        viewModel.fetchLesson()
+        viewModel.fetchLessons(40)
     }
-
+    
     Scaffold(
         topBar = {
             TopAppBar(
@@ -41,6 +41,7 @@ fun LessonsScreen(
         LazyColumn(content = {
             items(viewModel.lessonsList) { lesson ->
                 Text(text = "id: ${lesson.id}", modifier = Modifier.padding(it))
+                Text(text = "Группа: ${lesson.group.group}, id: ${lesson.group.id}")
                 Text(text = "Предмет: ${lesson.subject.subject}")
                 Text(text = "Преподаватель: ${lesson.teacher.first_name} ${lesson.teacher.last_name}")
             }
