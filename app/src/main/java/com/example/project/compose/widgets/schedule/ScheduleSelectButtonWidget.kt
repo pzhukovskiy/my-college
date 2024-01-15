@@ -18,6 +18,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
@@ -83,6 +84,8 @@ fun ScheduleSelectButtonWidget(
 
     val context = LocalContext.current
 
+    val id = remember { mutableStateOf(0) }
+
     LaunchedEffect(key1 = Unit) {
         if (groupViewModel.errorMessage.isBlank()) {
             groupViewModel.getGroups()
@@ -120,44 +123,52 @@ fun ScheduleSelectButtonWidget(
                             .fillMaxWidth()
                             .height(60.dp)
                     ) {
-                        OutlinedTextField(
-                            value = selectedItemGroup,
-                            onValueChange = { selectedItemGroup = it},
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .onGloballyPositioned { coordinates ->
-                                    textFieldSize = coordinates.size.toSize()
-                                },
-                            label = { Text(text = stringResource(id = R.string.select_group))},
-                            trailingIcon = {
-                                Icon(
-                                    imageVector = iconGroup,
-                                    contentDescription = "",
-                                    modifier = Modifier
-                                        .clickable {
-                                            expandedGroup = !expandedGroup
-                                        }
-                                )
+
+                        TextField(
+                            value = id.value.toString(),
+                            onValueChange = {
+                                id.value = it.toIntOrNull() ?: 0
                             }
                         )
 
-                        DropdownMenu(
-                            expanded = expandedGroup,
-                            onDismissRequest = { expandedGroup = false },
-                            modifier = Modifier
-                                .width(with(LocalDensity.current) { textFieldSize.width.toDp() })
-                                .verticalScroll(rememberScrollState())
-                                .heightIn(max = with(LocalDensity.current) { 48.dp * visibleItemsGroup })
-                        ) {
-                            groupViewModel.groupList.forEach { group ->
-                                DropdownMenuItem(onClick = {
-                                    selectedItemGroup = group.group
-                                    expandedGroup = false
-                                }) {
-                                    Text(text = group.group)
-                                }
-                            }
-                        }
+//                        OutlinedTextField(
+//                            value = selectedItemGroup,
+//                            onValueChange = { selectedItemGroup = it},
+//                            modifier = Modifier
+//                                .fillMaxWidth()
+//                                .onGloballyPositioned { coordinates ->
+//                                    textFieldSize = coordinates.size.toSize()
+//                                },
+//                            label = { Text(text = stringResource(id = R.string.select_group))},
+//                            trailingIcon = {
+//                                Icon(
+//                                    imageVector = iconGroup,
+//                                    contentDescription = "",
+//                                    modifier = Modifier
+//                                        .clickable {
+//                                            expandedGroup = !expandedGroup
+//                                        }
+//                                )
+//                            }
+//                        )
+
+//                        DropdownMenu(
+//                            expanded = expandedGroup,
+//                            onDismissRequest = { expandedGroup = false },
+//                            modifier = Modifier
+//                                .width(with(LocalDensity.current) { textFieldSize.width.toDp() })
+//                                .verticalScroll(rememberScrollState())
+//                                .heightIn(max = with(LocalDensity.current) { 48.dp * visibleItemsGroup })
+//                        ) {
+//                            groupViewModel.groupList.forEach { group ->
+//                                DropdownMenuItem(onClick = {
+//                                    selectedItemGroup = group.group
+//                                    expandedGroup = false
+//                                }) {
+//                                    Text(text = group.group)
+//                                }
+//                            }
+//                        }
                     }
                     Box(
                         modifier = Modifier
@@ -166,17 +177,19 @@ fun ScheduleSelectButtonWidget(
                             .background(Color(PrimaryBlue.toArgb()))
                             .height(40.dp)
                             .clickable {
-                                if (selectedItemGroup == "") {
-                                    Toast
-                                        .makeText(
-                                            context,
-                                            context.getString(R.string.select_group),
-                                            Toast.LENGTH_LONG
-                                        )
-                                        .show()
-                                } else {
-                                    navController.navigate(NavigationItem.LessonsScreenDay.route)
-                                }
+//                                if (selectedItemGroup == "") {
+//                                    Toast
+//                                        .makeText(
+//                                            context,
+//                                            context.getString(R.string.select_group),
+//                                            Toast.LENGTH_LONG
+//                                        )
+//                                        .show()
+//                                } else {
+//                                    navController.navigate(NavigationItem.LessonsScreenDay.route)
+//                                }
+//                                navController.currentBackStackEntry?.arguments?.putInt("id", 20)
+                                navController.navigate(NavigationItem.LessonsScreenWeek.route)
                             },
                         contentAlignment = Alignment.Center
                     ) {
@@ -283,8 +296,7 @@ fun ScheduleSelectButtonWidget(
                                             Toast.LENGTH_LONG
                                         )
                                         .show()
-                                }
-                                else {
+                                } else {
 
                                 }
                             },
@@ -313,8 +325,7 @@ fun ScheduleSelectButtonWidget(
                                             Toast.LENGTH_LONG
                                         )
                                         .show()
-                                }
-                                else {
+                                } else {
 
                                 }
                             },

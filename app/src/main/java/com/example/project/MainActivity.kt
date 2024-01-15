@@ -34,7 +34,7 @@ import com.example.project.compose.screens.administration.DetailAdministrationSc
 import com.example.project.compose.screens.about_college.info_1966.Info1966
 import com.example.project.compose.screens.administration.AdministrationScreen
 import com.example.project.compose.screens.contacts.ContactsPageScreen
-import com.example.project.compose.screens.homePage.HomepageScreen
+import com.example.project.compose.screens.home_page.HomepageScreen
 import com.example.project.compose.screens.lessons.LessonsScreenDay
 import com.example.project.compose.screens.lessons.LessonsScreenWeek
 import com.example.project.compose.screens.links.ListAllLinksScreen
@@ -145,11 +145,13 @@ class MainActivity : ComponentActivity() {
                         )
                     }
 
-                    //lessons day
-                    composable(NavigationItem.LessonsScreenWeek.route) {
+                    //lessons week
+                    composable(NavigationItem.LessonsScreenWeek.route) { backStackEntry ->
+                        val itemID = backStackEntry.arguments?.getInt("id")
                         LessonsScreenWeek(
                             viewModel = lessonsViewModel,
-                            navController = navController
+                            navController = navController,
+                            id = 10
                         )
                     }
 

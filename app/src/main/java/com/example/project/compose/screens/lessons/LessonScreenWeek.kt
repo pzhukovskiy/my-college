@@ -12,6 +12,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.example.project.viewmodels.LessonsViewModel
@@ -19,16 +23,18 @@ import com.example.project.viewmodels.LessonsViewModel
 @Composable
 fun LessonsScreenWeek(
     viewModel: LessonsViewModel,
-    navController: NavController
+    navController: NavController,
+    id: Int
 ) {
-    LaunchedEffect(key1 = Unit) {
-        viewModel.fetchLessons(40)
+
+    LaunchedEffect(key1 = id) {
+        viewModel.fetchLessons(id)
     }
     
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = "Расписание") },
+                title = { Text(text = "Расписание, $id") },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Back")

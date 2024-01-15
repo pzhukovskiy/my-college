@@ -1,4 +1,4 @@
-package com.example.project.compose.screens.homePage
+package com.example.project.compose.screens.home_page
 
 import android.app.Activity
 import androidx.activity.OnBackPressedCallback
