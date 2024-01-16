@@ -1,4 +1,4 @@
-package com.example.project.compose.screens.lessons
+package com.example.project.compose.screens.lessons.group
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -14,15 +14,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
+import com.example.project.viewmodels.SharedViewModel
 import com.example.project.viewmodels.LessonsViewModel
 
 @Composable
-fun LessonsScreenDay(
-    viewModel: LessonsViewModel,
+fun LessonsScreenDayForGroup(
+    viewModel: SharedViewModel,
+    lessonsViewModel: LessonsViewModel,
     navController: NavController
 ) {
+
+    val sharedValue = viewModel.sharedValue.value
+
+    //lesson id
     LaunchedEffect(key1 = Unit) {
-        viewModel.fetchLesson()
+        lessonsViewModel.fetchLessonsGroup(id = sharedValue)
     }
 
     Scaffold(
@@ -37,12 +43,12 @@ fun LessonsScreenDay(
             )
         }
     ) {
-        // Показывать расписание в LazyColumn
         LazyColumn(content = {
-            items(viewModel.lessonsList) { lesson ->
+            items(lessonsViewModel.lessonsList) { lesson ->
                 Text(text = "id: ${lesson.id}", modifier = Modifier.padding(it))
                 Text(text = "Группа: ${lesson.group.group}, id: ${lesson.group.id}")
                 Text(text = "Предмет: ${lesson.subject.subject}")
+                Text(text = "Дата: ${lesson.date}")
                 Text(text = "Преподаватель: ${lesson.teacher.first_name} ${lesson.teacher.last_name}")
             }
         })

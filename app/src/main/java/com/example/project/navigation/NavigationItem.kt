@@ -14,8 +14,10 @@ sealed class NavigationItem(val route: String) {
     object ContactsPage : NavigationItem("ContactsPage")//ContactsPageScreen
     object ListTeachers : NavigationItem("ListTeachers")//TeachersScreen
     object DetailTeacher : NavigationItem("DetailTeacher")//DetailTeacherScreen
-    object LessonsScreenDay : NavigationItem("LessonsDay")//LessonsScreenDay
-    object LessonsScreenWeek : NavigationItem("LessonsWeek")//LessonsScreenWeek
+    object LessonsScreenDayGroup : NavigationItem("LessonsDayGroup")//LessonsScreenDayGroup
+    object LessonsScreenDayTeacher : NavigationItem("LessonsDayTeacher")//LessonsScreenDayTeacher
+    object LessonsScreenWeekGroup : NavigationItem("LessonsWeekGroup")//LessonsScreenWeekGroup
+    object LessonsScreenWeekTeacher : NavigationItem("LessonsWeekTeacher")//LessonsScreenWeekTeacher
     object Info1966 : NavigationItem("1966")//Info1966
     object Info1967 : NavigationItem("1967")//Info1967
     object Info1969 : NavigationItem("1969")//Info1969

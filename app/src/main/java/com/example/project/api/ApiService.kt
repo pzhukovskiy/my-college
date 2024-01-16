@@ -13,6 +13,8 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ApiService {
     @Headers(BuildConfig.API_KEY)
@@ -31,14 +33,26 @@ interface ApiService {
     @GET("groups")
     suspend fun getGroups(): List<Group>
 
-    @Headers(BuildConfig.API_KEY)
-    @GET("lessons")
-    suspend fun getLessons(): List<Lessons>
 
+    //day group
     @Headers(BuildConfig.API_KEY)
-    @GET("lessons/2")
-    suspend fun getLesson(): Lessons
+    @GET("getcurrent/{id}")
+    suspend fun getLessonsGroup(@Path("id") id: Int): List<Lessons>
 
+    //day teacher
+    @Headers(BuildConfig.API_KEY)
+    @GET("getcurrentteacher/{id}")
+    suspend fun getLessonsTeacher(@Path("id") id: Int): List<Lessons>
+
+    //week group
+    @Headers(BuildConfig.API_KEY)
+    @GET("getforweek")
+    suspend fun getLessonsForWeekGroup(): List<Lessons>
+
+    //week group
+    @Headers(BuildConfig.API_KEY)
+    @GET("getforweekteacher")
+    suspend fun getLessonsForWeekTeacher(): List<Lessons>
 
     companion object {
         fun create(): ApiService {

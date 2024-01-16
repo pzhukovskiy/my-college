@@ -8,8 +8,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.project.api.ApiService
 import com.example.project.data.lessons.Lessons
 import com.example.project.repository.lessons.LessonsRepository
 import kotlinx.coroutines.Job
@@ -47,12 +50,12 @@ class LessonsViewModel(
         }
     }
 
-    fun fetchLesson() {
+    fun fetchLessonsGroup(id: Int) {
         job = viewModelScope.launch {
             try {
-                lessonsRepository.fetchLesson().collect {
+                lessonsRepository.fetchLessonsGroup(id).collect {
                     _lessons.clear()
-                    _lessons.add(it)
+                    _lessons.addAll(it)
                 }
             } catch (e: Exception) {
                 errorMessage = "Error fetching: ${e.message}"
@@ -60,10 +63,36 @@ class LessonsViewModel(
         }
     }
 
-    fun fetchLessons(id: Int) {
+    fun fetchLessonsTeacher(id: Int) {
         job = viewModelScope.launch {
             try {
-                lessonsRepository.fetchLessons(id).collect {
+                lessonsRepository.fetchLessonsTeacher(id).collect {
+                    _lessons.clear()
+                    _lessons.addAll(it)
+                }
+            } catch (e: Exception) {
+                errorMessage = "Error fetching: ${e.message}"
+            }
+        }
+    }
+
+    fun fetchLessonsForWeekGroup() {
+        job = viewModelScope.launch {
+            try {
+                lessonsRepository.fetchLessonsForWeekGroup().collect {
+                    _lessons.clear()
+                    _lessons.addAll(it)
+                }
+            } catch (e: Exception) {
+                errorMessage = "Error fetching: ${e.message}"
+            }
+        }
+    }
+
+    fun fetchLessonsForWeekTeacher() {
+        job = viewModelScope.launch {
+            try {
+                lessonsRepository.fetchLessonsForWeekTeacher().collect {
                     _lessons.clear()
                     _lessons.addAll(it)
                 }

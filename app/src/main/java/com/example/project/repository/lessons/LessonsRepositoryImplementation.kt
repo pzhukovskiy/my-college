@@ -6,16 +6,31 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class LessonsRepositoryImplementation : LessonsRepository {
-    override suspend fun fetchLesson(): Flow<Lessons> {
+
+    override suspend fun fetchLessonsGroup(id: Int): Flow<List<Lessons>> {
         return flow {
-            val lesson = ApiService.create().getLesson()
+            val lesson = ApiService.create().getLessonsGroup(id)
             emit(lesson)
         }
     }
 
-    override suspend fun fetchLessons(id: Int): Flow<List<Lessons>> {
+    override suspend fun fetchLessonsTeacher(id: Int): Flow<List<Lessons>> {
         return flow {
-            val lessons = ApiService.create().getLessons().filter { it.group.id == id }
+            val lesson = ApiService.create().getLessonsTeacher(id)
+            emit(lesson)
+        }
+    }
+
+    override suspend fun fetchLessonsForWeekGroup(): Flow<List<Lessons>> {
+        return flow {
+            val lessons = ApiService.create().getLessonsForWeekGroup()
+            emit(lessons)
+        }
+    }
+
+    override suspend fun fetchLessonsForWeekTeacher(): Flow<List<Lessons>> {
+        return flow {
+            val lessons = ApiService.create().getLessonsForWeekTeacher()
             emit(lessons)
         }
     }

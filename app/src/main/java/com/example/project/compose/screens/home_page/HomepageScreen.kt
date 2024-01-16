@@ -26,6 +26,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import com.example.project.viewmodels.SharedViewModel
 import com.example.project.compose.screens.connection.ConnectionErrorComponent
 import com.example.project.compose.widgets.about_college.AboutCollegeWidget
 import com.example.project.compose.widgets.bottomBar.BottomBarCustomWidget
@@ -40,15 +41,16 @@ import com.example.project.viewmodels.NewsViewModel
 @Composable
 fun HomepageScreen(
     navController: NavHostController,
-    viewModel: NewsViewModel,
-    userData: UserData?
+    newsViewModel: NewsViewModel,
+    userData: UserData?,
+    viewModel: SharedViewModel,
 ) {
 
     var isRefreshing by remember { mutableStateOf(false) }
 
     LaunchedEffect(key1 = Unit) {
-        if (viewModel.errorMessage.isBlank()) {
-            viewModel.getNews()
+        if (newsViewModel.errorMessage.isBlank()) {
+            newsViewModel.getNews()
         }
     }
 
@@ -75,7 +77,7 @@ fun HomepageScreen(
         }
     }
 
-    if (viewModel.errorMessage.isBlank()) {
+    if (newsViewModel.errorMessage.isBlank()) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -84,10 +86,11 @@ fun HomepageScreen(
 
             AboutCollegeWidget(navController = navController)
 
-            PhotoSliderWidget(navController = navController, newsList = viewModel.newsList, pagerState = pagerState)
+            PhotoSliderWidget(navController = navController, newsList = newsViewModel.newsList, pagerState = pagerState)
 
             ScheduleSelectButtonWidget(
-                navController = navController
+                navController = navController,
+                viewModel = viewModel
             )
 
             AdminLinksWidget()
@@ -107,9 +110,9 @@ fun HomepageScreen(
     }
     else {
         ConnectionErrorComponent {
-            if (viewModel.isConnected()) {
+            if (newsViewModel.isConnected()) {
                 isRefreshing = true
-                viewModel.fetchData()
+                newsViewModel.fetchData()
             }
         }
     }

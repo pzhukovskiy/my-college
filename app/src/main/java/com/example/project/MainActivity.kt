@@ -35,8 +35,10 @@ import com.example.project.compose.screens.about_college.info_1966.Info1966
 import com.example.project.compose.screens.administration.AdministrationScreen
 import com.example.project.compose.screens.contacts.ContactsPageScreen
 import com.example.project.compose.screens.home_page.HomepageScreen
-import com.example.project.compose.screens.lessons.LessonsScreenDay
-import com.example.project.compose.screens.lessons.LessonsScreenWeek
+import com.example.project.compose.screens.lessons.group.LessonsScreenDayForGroup
+import com.example.project.compose.screens.lessons.group.LessonsScreenWeekForGroup
+import com.example.project.compose.screens.lessons.teacher.LessonsScreenDayForTeacher
+import com.example.project.compose.screens.lessons.teacher.LessonsScreenWeekForTeacher
 import com.example.project.compose.screens.links.ListAllLinksScreen
 import com.example.project.compose.screens.news.DetailNewsScreen
 import com.example.project.compose.screens.news.ListAllNewsScreen
@@ -57,6 +59,7 @@ import com.example.project.ui.theme.ProjectTheme
 import com.example.project.viewmodels.AdministratorViewModel
 import com.example.project.viewmodels.LessonsViewModel
 import com.example.project.viewmodels.NewsViewModel
+import com.example.project.viewmodels.SharedViewModel
 import com.example.project.viewmodels.TeacherViewModel
 import com.google.android.gms.auth.api.identity.Identity
 import kotlinx.coroutines.launch
@@ -100,6 +103,8 @@ class MainActivity : ComponentActivity() {
             val connection by connectivityStatus()
             val isConnected = connection === ConnectionStatus.Available
 
+            val sharedViewModel: SharedViewModel = viewModel()
+
             ProjectTheme {
                 NavHost(
                     navController = navController,
@@ -112,12 +117,14 @@ class MainActivity : ComponentActivity() {
                     val newsViewModel = NewsViewModel(NewsRepositoryImplementation(), applicationContext)
                     val lessonsViewModel = LessonsViewModel(LessonsRepositoryImplementation(), applicationContext)
 
+
                     //homepage
                     composable(NavigationItem.Homepage.route) {
                             HomepageScreen(
                                 navController = navController,
-                                viewModel = newsViewModel,
-                                userData = googleAuthUiClient.getSignedInUser()
+                                newsViewModel = newsViewModel,
+                                userData = googleAuthUiClient.getSignedInUser(),
+                                viewModel = sharedViewModel
                             )
                     }
 
@@ -137,21 +144,39 @@ class MainActivity : ComponentActivity() {
                         }
                     }
 
-                    //lessons day
-                    composable(NavigationItem.LessonsScreenDay.route) {
-                        LessonsScreenDay(
+                    //lessons day for group
+                    composable(NavigationItem.LessonsScreenDayGroup.route) {
+                        LessonsScreenDayForGroup(
+                            lessonsViewModel = lessonsViewModel,
+                            navController = navController,
+                            viewModel = sharedViewModel
+                        )
+                    }
+
+                    //lessons day for teacher
+                    composable(NavigationItem.LessonsScreenDayTeacher.route) {
+                        LessonsScreenDayForTeacher(
+                            lessonsViewModel = lessonsViewModel,
+                            viewModel = sharedViewModel,
+                            onBackClick = {
+                                navController.popBackStack()
+                            }
+                        )
+                    }
+
+                    //lessons week for group
+                    composable(NavigationItem.LessonsScreenWeekGroup.route) {
+                        LessonsScreenWeekForGroup(
                             viewModel = lessonsViewModel,
                             navController = navController
                         )
                     }
 
-                    //lessons week
-                    composable(NavigationItem.LessonsScreenWeek.route) { backStackEntry ->
-                        val itemID = backStackEntry.arguments?.getInt("id")
-                        LessonsScreenWeek(
+                    //lessons week for teacher
+                    composable(NavigationItem.LessonsScreenWeekTeacher.route) {
+                        LessonsScreenWeekForTeacher(
                             viewModel = lessonsViewModel,
-                            navController = navController,
-                            id = 10
+                            navController = navController
                         )
                     }
 

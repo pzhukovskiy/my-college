@@ -1,4 +1,4 @@
-package com.example.project.compose.screens.lessons
+package com.example.project.compose.screens.lessons.group
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -12,29 +12,24 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.example.project.viewmodels.LessonsViewModel
 
 @Composable
-fun LessonsScreenWeek(
+fun LessonsScreenWeekForGroup(
     viewModel: LessonsViewModel,
-    navController: NavController,
-    id: Int
+    navController: NavController
 ) {
 
-    LaunchedEffect(key1 = id) {
-        viewModel.fetchLessons(id)
+    LaunchedEffect(key1 = Unit) {
+        viewModel.fetchLessonsForWeekGroup()
     }
     
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = "Расписание, $id") },
+                title = { Text(text = "Расписание") },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Back")
