@@ -283,6 +283,7 @@ fun ScheduleSelectButtonWidget(
                                         .show()
                                 } else {
                                     viewModel.sharedValue.value = selectedIndexTeacher.toInt()
+                                    viewModel.teacherValue.value = selectedItemTeacher
                                     navController.navigate(NavigationItem.LessonsScreenDayTeacher.route)
                                 }
                             },

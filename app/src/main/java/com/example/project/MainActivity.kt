@@ -44,7 +44,6 @@ import com.example.project.compose.screens.news.DetailNewsScreen
 import com.example.project.compose.screens.news.ListAllNewsScreen
 import com.example.project.compose.screens.profile.ProfilePageScreen
 import com.example.project.compose.screens.registration.RegistrationPageScreen
-import com.example.project.compose.screens.settings.SettingsPageScreen
 import com.example.project.compose.screens.teachers.DetailTeacherScreen
 import com.example.project.compose.screens.teachers.TeacherScreen
 import com.example.project.helper.ConnectionStatus
@@ -248,12 +247,6 @@ class MainActivity : ComponentActivity() {
                                 }
                             }
                         )
-                    }
-
-
-                    //settings page
-                    composable(NavigationItem.SettingsPage.route) {
-                        SettingsPageScreen()
                     }
 
                     //profile

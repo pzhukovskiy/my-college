@@ -1,14 +1,14 @@
 package com.example.project.compose.screens.lessons.teacher
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -23,9 +23,9 @@ import androidx.compose.ui.unit.sp
 import com.example.project.R
 import com.example.project.compose.widgets.headers.StaticHeaderWidget
 import com.example.project.ui.theme.Roboto
+import com.example.project.utils.CurrentDate
 import com.example.project.viewmodels.SharedViewModel
 import com.example.project.viewmodels.LessonsViewModel
-import java.time.LocalDate
 
 @Composable
 fun LessonsScreenDayForTeacher(
@@ -35,16 +35,7 @@ fun LessonsScreenDayForTeacher(
 ) {
 
     val sharedValue = viewModel.sharedValue.value
-
-    val currentDate = LocalDate.now()
-    val currentDayOfMonth = currentDate.dayOfMonth
-    val currentMonth = currentDate.month
-    val currentDayOfWeek = currentDate.dayOfWeek
-
-    val dayOfWeekString = currentDayOfWeek.getDisplayName(
-        java.time.format.TextStyle.FULL,
-        java.util.Locale.getDefault()
-    )
+    val teacherValue = viewModel.teacherValue.value
 
     //lesson id
     LaunchedEffect(key1 = Unit) {
@@ -53,44 +44,106 @@ fun LessonsScreenDayForTeacher(
         }
     }
 
-    Scaffold(
-        content = { paddingValues ->
-            if (lessonsViewModel.errorMessage.isBlank()) {
-                Column {
-                    StaticHeaderWidget(
-                        text = "Расписание на $currentDayOfMonth. $currentMonth",
-                        imagePainter = painterResource(id = R.drawable.dark_gray_background_with_polygonal_forms_vector),
-                        onBackClick = {
-                            onBackClick()
-                        }
-                    )
+    if (lessonsViewModel.errorMessage.isBlank() && lessonsViewModel.lessonsList.isNotEmpty()) {
+        Column() {
+            StaticHeaderWidget(
+                text = "$teacherValue (${CurrentDate().currentDayOfMonth}. ${CurrentDate().currentMonth})",
+                imagePainter = painterResource(id = R.drawable.dark_gray_background_with_polygonal_forms_vector),
+                onBackClick = {
+                    onBackClick()
+                }
+            )
 
+            Box(
+                modifier = Modifier
+                    .height(60.dp)
+                    .fillMaxWidth(),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = CurrentDate().dayOfWeekString[0].uppercaseChar() + CurrentDate().dayOfWeekString.substringAfter(CurrentDate().dayOfWeekString[0]),
+                    fontFamily = Roboto,
+                    color = Color.Black,
+                    fontSize = 32.sp,
+                    fontStyle = FontStyle.Normal,
+                    fontWeight = FontWeight(500)
+                )
+            }
+
+            LazyColumn(content = {
+                items(lessonsViewModel.lessonsList) { lesson ->
                     Box(
                         modifier = Modifier
-                            .height(60.dp)
-                            .fillMaxWidth(),
-                        contentAlignment = Alignment.Center
+                            .fillMaxWidth()
+                            .height(150.dp)
+                            .padding(horizontal = 12.dp, vertical = 4.dp)
                     ) {
-                        Text(
-                            text = dayOfWeekString[0].toUpperCase() + dayOfWeekString.substringAfter(dayOfWeekString[0]),
-                            fontFamily = Roboto,
-                            color = Color.Black,
-                            fontSize = 32.sp,
-                            fontStyle = FontStyle.Normal,
-                            fontWeight = FontWeight(500)
-                        )
-                    }
-
-                    LazyColumn(content = {
-                        items(lessonsViewModel.lessonsList) { lesson ->
-                            Text(text = "id: ${lesson.id}", modifier = Modifier.padding(paddingValues))
-                            Text(text = "Группа: ${lesson.group.group}, id: ${lesson.group.id}")
-                            Text(text = "Предмет: ${lesson.subject.subject}")
-                            Text(text = "Преподаватель: ${lesson.teacher.first_name} ${lesson.teacher.last_name}")
+                        Column {
+                            Text(
+                                text = "Группа: ${lesson.group.group}",
+                                fontFamily = Roboto,
+                                color = Color.Black,
+                                fontStyle = FontStyle.Normal,
+                                fontWeight = FontWeight(400)
+                            )
+                            Text(
+                                text = "Предмет: ${lesson.subject.subject}",
+                                fontFamily = Roboto,
+                                color = Color.Black,
+                                fontStyle = FontStyle.Normal,
+                                fontWeight = FontWeight(400)
+                            )
+                            Text(
+                                text = "Преподаватель: ${lesson.teacher.middle_name} ${lesson.teacher.first_name} ${lesson.teacher.last_name}",
+                                fontFamily = Roboto,
+                                color = Color.Black,
+                                fontStyle = FontStyle.Normal,
+                                fontWeight = FontWeight(400)
+                            )
+                            Text(
+                                text = "Кабинет: ${lesson.room.room}",
+                                fontFamily = Roboto,
+                                color = Color.Black,
+                                fontStyle = FontStyle.Normal,
+                                fontWeight = FontWeight(400)
+                            )
+                            Text(
+                                text = "Номер пары: ${lesson.lesson_number}",
+                                fontFamily = Roboto,
+                                color = Color.Black,
+                                fontStyle = FontStyle.Normal,
+                                fontWeight = FontWeight(400)
+                            )
                         }
-                    })
+                    }
                 }
+                item {
+                    Spacer(modifier = Modifier.height(50.dp))
+                }
+            })
+        }
+    }
+    else {
+        Column {
+
+            StaticHeaderWidget(
+                text = "$teacherValue (${CurrentDate().currentDayOfMonth}. ${CurrentDate().currentMonth})",
+                imagePainter = painterResource(id = R.drawable.dark_gray_background_with_polygonal_forms_vector),
+                onBackClick = {
+                    onBackClick()
+                }
+            )
+
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Text(
+                    text = "Занятий на текущий день нету",
+                    fontFamily = Roboto,
+                    color = Color.Black,
+                    fontSize = 16.sp,
+                    fontStyle = FontStyle.Normal,
+                    fontWeight = FontWeight(500)
+                )
             }
         }
-    )
+    }
 }
