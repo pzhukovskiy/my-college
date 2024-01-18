@@ -33,22 +33,11 @@ fun AboutCollegeScreen(
     val uuid = UUID.randomUUID()
 
     val listAllLinks = listOf(
-        Links(id = uuid.toString(), text = stringResource(id = R.string.about_college_1966),  route = NavigationItem.Info1966.route),
-        Links(id = uuid.toString(), text = stringResource(id = R.string.about_college_1967),  route = NavigationItem.Info1967.route),
-        Links(id = uuid.toString(), text = stringResource(id = R.string.about_college_1969),  route = NavigationItem.Info1969.route),
-        Links(id = uuid.toString(), text = stringResource(id = R.string.about_college_1970),  route = NavigationItem.Info1970.route),
-        Links(id = uuid.toString(), text = stringResource(id = R.string.about_college_1971),  route = NavigationItem.Info1971.route),
-        Links(id = uuid.toString(), text = stringResource(id = R.string.about_college_1972),  route = NavigationItem.Info1972.route),
-        Links(id = uuid.toString(), text = stringResource(id = R.string.about_college_1973),  route = NavigationItem.Info1973.route),
-        Links(id = uuid.toString(), text = stringResource(id = R.string.about_college_1974),  route = NavigationItem.Info1974.route),
-        Links(id = uuid.toString(), text = stringResource(id = R.string.about_college_1975),  route = NavigationItem.Info1975.route),
-        Links(id = uuid.toString(), text = stringResource(id = R.string.about_college_1976),  route = NavigationItem.Info1976.route),
-        Links(id = uuid.toString(), text = stringResource(id = R.string.about_college_1977),  route = NavigationItem.Info1977.route),
-        Links(id = uuid.toString(), text = stringResource(id = R.string.about_college_1978),  route = NavigationItem.Info1978.route),
-        Links(id = uuid.toString(), text = stringResource(id = R.string.about_college_1979),  route = NavigationItem.Info1979.route),
-        Links(id = uuid.toString(), text = stringResource(id = R.string.about_college_1980),  route = NavigationItem.Info1980.route),
-        Links(id = uuid.toString(), text = stringResource(id = R.string.about_college_1981),  route = NavigationItem.Info1981.route),
-        Links(id = uuid.toString(), text = stringResource(id = R.string.about_college_1982),  route = NavigationItem.Info1982.route),
+        Links(id = uuid.toString(), text = "1966 год",  route = NavigationItem.Info1966.route),
+        Links(id = uuid.toString(), text = "1967 год",  route = NavigationItem.Info1967.route),
+        Links(id = uuid.toString(), text = "1969 год",  route = NavigationItem.Info1969.route),
+        Links(id = uuid.toString(), text = "1970 год",  route = NavigationItem.Info1970.route),
+        Links(id = uuid.toString(), text = "1971 год",  route = NavigationItem.Info1971.route),
     )
 
     Column {
@@ -61,7 +50,7 @@ fun AboutCollegeScreen(
         )
 
         LazyColumn(content = {
-            items(listAllLinks) {
+            items(listAllLinks.reversed()) {
                 Text(
                     text = it.text,
                     fontFamily = Roboto,

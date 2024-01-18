@@ -1,7 +1,5 @@
 package com.example.project
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
@@ -30,8 +28,12 @@ import androidx.navigation.navArgument
 import com.example.project.auth.GoogleAuthUiClient
 import com.example.project.auth.SignInViewModel
 import com.example.project.compose.screens.about_college.AboutCollegeScreen
+import com.example.project.compose.screens.about_college.year_1966.Year1966
+import com.example.project.compose.screens.about_college.year_1967.Year1967
+import com.example.project.compose.screens.about_college.year_1969.Year1969
+import com.example.project.compose.screens.about_college.year_1970.Year1970
+import com.example.project.compose.screens.about_college.year_1971.Year1971
 import com.example.project.compose.screens.administration.DetailAdministrationScreen
-import com.example.project.compose.screens.about_college.info_1966.Info1966
 import com.example.project.compose.screens.administration.AdministrationScreen
 import com.example.project.compose.screens.contacts.ContactsPageScreen
 import com.example.project.compose.screens.home_page.HomepageScreen
@@ -87,16 +89,6 @@ class MainActivity : ComponentActivity() {
                 }
             }
 
-            //notifications
-            val notificationChannel= NotificationChannel(
-                "project_notification",
-                "Project",
-                NotificationManager.IMPORTANCE_HIGH
-            )
-            val notificationManager=getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(notificationChannel)
-            //
-
             val navController: NavHostController = rememberNavController()
 
             val connection by connectivityStatus()
@@ -147,8 +139,10 @@ class MainActivity : ComponentActivity() {
                     composable(NavigationItem.LessonsScreenDayGroup.route) {
                         LessonsScreenDayForGroup(
                             lessonsViewModel = lessonsViewModel,
-                            navController = navController,
-                            viewModel = sharedViewModel
+                            viewModel = sharedViewModel,
+                            onBackClick = {
+                                navController.popBackStack()
+                            }
                         )
                     }
 
@@ -166,16 +160,20 @@ class MainActivity : ComponentActivity() {
                     //lessons week for group
                     composable(NavigationItem.LessonsScreenWeekGroup.route) {
                         LessonsScreenWeekForGroup(
-                            viewModel = lessonsViewModel,
-                            navController = navController
+                            lessonsViewModel = lessonsViewModel,
+                            onBackClick = {
+                                navController.popBackStack()
+                            }
                         )
                     }
 
                     //lessons week for teacher
                     composable(NavigationItem.LessonsScreenWeekTeacher.route) {
                         LessonsScreenWeekForTeacher(
-                            viewModel = lessonsViewModel,
-                            navController = navController
+                            lessonsViewModel = lessonsViewModel,
+                            onBackClick = {
+                                navController.popBackStack()
+                            }
                         )
                     }
 
@@ -341,7 +339,43 @@ class MainActivity : ComponentActivity() {
 
                     //1966
                     composable(NavigationItem.Info1966.route) {
-                        Info1966(
+                        Year1966(
+                            onBackClick = {
+                                navController.popBackStack()
+                            }
+                        )
+                    }
+
+                    //1967
+                    composable(NavigationItem.Info1967.route) {
+                        Year1967(
+                            onBackClick = {
+                                navController.popBackStack()
+                            }
+                        )
+                    }
+
+                    //1969
+                    composable(NavigationItem.Info1969.route) {
+                        Year1969(
+                            onBackClick = {
+                                navController.popBackStack()
+                            }
+                        )
+                    }
+
+                    //1970
+                    composable(NavigationItem.Info1970.route) {
+                        Year1970(
+                            onBackClick = {
+                                navController.popBackStack()
+                            }
+                        )
+                    }
+
+                    //1971
+                    composable(NavigationItem.Info1971.route) {
+                        Year1971(
                             onBackClick = {
                                 navController.popBackStack()
                             }

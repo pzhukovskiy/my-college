@@ -181,6 +181,7 @@ fun ScheduleSelectButtonWidget(
                                         .show()
                                 } else {
                                     viewModel.sharedValue.value = selectedIndexGroup.toInt()
+                                    viewModel.groupValue.value = selectedItemGroup
                                     navController.navigate(NavigationItem.LessonsScreenDayGroup.route)
                                 }
                             },

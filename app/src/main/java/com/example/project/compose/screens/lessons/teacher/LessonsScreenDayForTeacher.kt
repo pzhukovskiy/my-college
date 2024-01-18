@@ -45,9 +45,9 @@ fun LessonsScreenDayForTeacher(
     }
 
     if (lessonsViewModel.errorMessage.isBlank() && lessonsViewModel.lessonsList.isNotEmpty()) {
-        Column() {
+        Column {
             StaticHeaderWidget(
-                text = "$teacherValue (${CurrentDate().currentDayOfMonth}. ${CurrentDate().currentMonth})",
+                text = teacherValue,
                 imagePainter = painterResource(id = R.drawable.dark_gray_background_with_polygonal_forms_vector),
                 onBackClick = {
                     onBackClick()
@@ -56,15 +56,15 @@ fun LessonsScreenDayForTeacher(
 
             Box(
                 modifier = Modifier
-                    .height(60.dp)
+                    .height(50.dp)
                     .fillMaxWidth(),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = CurrentDate().dayOfWeekString[0].uppercaseChar() + CurrentDate().dayOfWeekString.substringAfter(CurrentDate().dayOfWeekString[0]),
+                    text = "${CurrentDate().dayOfWeekString[0].uppercaseChar() + CurrentDate().dayOfWeekString.substringAfter(CurrentDate().dayOfWeekString[0])}, ${CurrentDate().currentDayOfMonth}.${CurrentDate().currentMonth}.${CurrentDate().currentYear}",
                     fontFamily = Roboto,
                     color = Color.Black,
-                    fontSize = 32.sp,
+                    fontSize = 18.sp,
                     fontStyle = FontStyle.Normal,
                     fontWeight = FontWeight(500)
                 )
@@ -75,44 +75,37 @@ fun LessonsScreenDayForTeacher(
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(150.dp)
+                            .height(130.dp)
                             .padding(horizontal = 12.dp, vertical = 4.dp)
                     ) {
                         Column {
                             Text(
-                                text = "Группа: ${lesson.group.group}",
+                                text = "№ ${lesson.lesson_number}",
+                                fontFamily = Roboto,
+                                color = Color.Black,
+                                fontStyle = FontStyle.Normal,
+                                fontWeight = FontWeight(700)
+                            )
+                            Text(
+                                text = lesson.group.group,
                                 fontFamily = Roboto,
                                 color = Color.Black,
                                 fontStyle = FontStyle.Normal,
                                 fontWeight = FontWeight(400)
                             )
                             Text(
-                                text = "Предмет: ${lesson.subject.subject}",
+                                text = "${lesson.subject.subject}\n(${lesson.lesson_type})",
                                 fontFamily = Roboto,
                                 color = Color.Black,
                                 fontStyle = FontStyle.Normal,
                                 fontWeight = FontWeight(400)
                             )
                             Text(
-                                text = "Преподаватель: ${lesson.teacher.middle_name} ${lesson.teacher.first_name} ${lesson.teacher.last_name}",
+                                text = lesson.room.room,
                                 fontFamily = Roboto,
                                 color = Color.Black,
                                 fontStyle = FontStyle.Normal,
-                                fontWeight = FontWeight(400)
-                            )
-                            Text(
-                                text = "Кабинет: ${lesson.room.room}",
-                                fontFamily = Roboto,
-                                color = Color.Black,
-                                fontStyle = FontStyle.Normal,
-                                fontWeight = FontWeight(400)
-                            )
-                            Text(
-                                text = "Номер пары: ${lesson.lesson_number}",
-                                fontFamily = Roboto,
-                                color = Color.Black,
-                                fontStyle = FontStyle.Normal,
-                                fontWeight = FontWeight(400)
+                                fontWeight = FontWeight(700)
                             )
                         }
                     }
@@ -127,16 +120,32 @@ fun LessonsScreenDayForTeacher(
         Column {
 
             StaticHeaderWidget(
-                text = "$teacherValue (${CurrentDate().currentDayOfMonth}. ${CurrentDate().currentMonth})",
+                text = teacherValue,
                 imagePainter = painterResource(id = R.drawable.dark_gray_background_with_polygonal_forms_vector),
                 onBackClick = {
                     onBackClick()
                 }
             )
 
+            Box(
+                modifier = Modifier
+                    .height(60.dp)
+                    .fillMaxWidth(),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "${CurrentDate().dayOfWeekString[0].uppercaseChar() + CurrentDate().dayOfWeekString.substringAfter(CurrentDate().dayOfWeekString[0])}, ${CurrentDate().currentDayOfMonth}.${CurrentDate().currentMonth}.${CurrentDate().currentYear}",
+                    fontFamily = Roboto,
+                    color = Color.Black,
+                    fontSize = 24.sp,
+                    fontStyle = FontStyle.Normal,
+                    fontWeight = FontWeight(500)
+                )
+            }
+
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 Text(
-                    text = "Занятий на текущий день нету",
+                    text = "Занятий на этот день не найдено",
                     fontFamily = Roboto,
                     color = Color.Black,
                     fontSize = 16.sp,

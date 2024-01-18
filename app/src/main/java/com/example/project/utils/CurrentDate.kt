@@ -28,5 +28,11 @@ class CurrentDate {
         java.util.Locale.getDefault()
     )
 
+    val currentYear: Int = currentDate.year
+
+    private val daysUntilMonday = (DayOfWeek.MONDAY.value - currentDayOfWeek.value - 7) % 7
+    val startDate = currentDate.plusDays(daysUntilMonday.toLong())
+    val endDate = startDate.plusDays(6)
+
     val currentDayOfMonth = currentDate.dayOfMonth
 }

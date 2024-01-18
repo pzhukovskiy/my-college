@@ -29,7 +29,6 @@ import androidx.compose.runtime.setValue
 import com.example.project.viewmodels.SharedViewModel
 import com.example.project.compose.screens.connection.ConnectionErrorComponent
 import com.example.project.compose.widgets.about_college.AboutCollegeWidget
-import com.example.project.compose.widgets.bottomBar.BottomBarCustomWidget
 import com.example.project.compose.widgets.headers.AnimatedHeaderWidget
 import com.example.project.compose.widgets.info_about_college.InformationAboutCollegeWidget
 import com.example.project.compose.widgets.links.AdminLinksWidget
@@ -97,15 +96,15 @@ fun HomepageScreen(
 
             InformationAboutCollegeWidget(context = LocalContext.current)
 
-            BottomBarCustomWidget(navController = navController, userData = userData)
-
             Spacer(modifier = Modifier.padding(25.dp))
         }
 
         AnimatedHeaderWidget(
             imagePainter = painterResource(id = R.drawable.dark_gray_background_with_polygonal_forms_vector),
             text = stringResource(R.string.main_page),
-            scrollState = scrollState
+            scrollState = scrollState,
+            navController = navController,
+            userData = userData
         )
     }
     else {
