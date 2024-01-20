@@ -4,7 +4,7 @@
     <string name="check_all_news">Просмотреть все новости</string>
 
     <string name="home">Домашняя страница</string>
-    <string name="links">Полезные ссылки</string>
+    <string name="links">Структура</string>
     <string name="settings">Настройки</string>
     <string name="profile">Профиль</string>
 
@@ -17,6 +17,7 @@
 
     <string name="search_teacher">Поиск преподавателя</string>
     <string name="search_administration">Поиск администратора</string>
+    <string name="search_employee">Поиск работника</string>
 
     <string name="schedule">Изменение расписания</string>
     <string name="schedule_new">Просмотрите новое расписание</string>
@@ -29,12 +30,15 @@
     <string name="link_college_administration">Администрация колледжа</string>
     <string name="link_college_teachers">Педагогический коллектив</string>
     <string name="link_contacts">Контакты</string>
+
+    <string name="link_employee">Работники</string>
+    <string name="link_employee_ahch">Работники АХЧ</string>
+
     <string name="link_applicant">Абитуриентам</string>
     <string name="link_schedule">Расписание</string>
     <string name="link_schedule_day">Расписание на день</string>
     <string name="link_schedule_week">Расписание на неделю</string>
     <string name="link_calls">Расписание звонков</string>
-    <string name="link_exams">График экзаменов</string>
     <string name="link_courses">Платные курсы</string>
     <string name="link_archive_news">Архив новостей</string>
 

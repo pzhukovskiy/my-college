@@ -45,11 +45,10 @@ fun ListAllLinksScreen(
     val listAllLinks = listOf(
         Links(id = uuid.toString(), text = context.getString(R.string.link_college_administration),  route = NavigationItem.ListAdministration.route),
         Links(id = uuid.toString(), text = context.getString(R.string.link_college_teachers),  route = NavigationItem.ListTeachers.route),
+        Links(id = uuid.toString(), text = context.getString(R.string.link_employee),  route = NavigationItem.ListEmployees.route),
+        Links(id = uuid.toString(), text = context.getString(R.string.link_employee_ahch),  route = NavigationItem.ListEmployeesAHCH.route),
         Links(id = uuid.toString(), text = context.getString(R.string.link_contacts),  route = NavigationItem.ContactsPage.route),
-//        Links(id = uuid.toString(), text = context.getString(R.string.link_applicant), route = NavigationItem.AboutCollege.route),
-//        Links(id = uuid.toString(), text = context.getString(R.string.link_calls), route = NavigationItem.AboutCollege.route),
-//        Links(id = uuid.toString(), text = context.getString(R.string.link_exams), route = NavigationItem.AboutCollege.route),
-//        Links(id = uuid.toString(), text = context.getString(R.string.link_courses), route = NavigationItem.AboutCollege.route)
+        Links(id = uuid.toString(), text = context.getString(R.string.link_calls),  route = NavigationItem.ScheduleTime.route)
     )
 
     Scaffold(

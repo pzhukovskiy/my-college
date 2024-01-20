@@ -11,12 +11,17 @@ sealed class NavigationItem(val route: String) {
     object ListAdministration : NavigationItem("ListAdministration")//ListAdministrationScreen
     object DetailAdministration : NavigationItem("DetailAdministration")//DetailAdministrationScreen
     object ContactsPage : NavigationItem("ContactsPage")//ContactsPageScreen
+    object ListEmployees : NavigationItem("ListEmployees")//ListEmployees
+    object DetailEmployees : NavigationItem("DetailEmployees")//DetailEmployees
+    object ListEmployeesAHCH : NavigationItem("ListEmployeesAHCH")//ListEmployees
+    object DetailEmployeesAHCH : NavigationItem("DetailEmployeesAHCH")//DetailEmployees
     object ListTeachers : NavigationItem("ListTeachers")//TeachersScreen
     object DetailTeacher : NavigationItem("DetailTeacher")//DetailTeacherScreen
     object LessonsScreenDayGroup : NavigationItem("LessonsDayGroup")//LessonsScreenDayGroup
     object LessonsScreenDayTeacher : NavigationItem("LessonsDayTeacher")//LessonsScreenDayTeacher
     object LessonsScreenWeekGroup : NavigationItem("LessonsWeekGroup")//LessonsScreenWeekGroup
     object LessonsScreenWeekTeacher : NavigationItem("LessonsWeekTeacher")//LessonsScreenWeekTeacher
+    object ScheduleTime : NavigationItem("ScheduleTime")//ScheduleTimeScreen
     object Info1966 : NavigationItem("1966")//Info1966
     object Info1967 : NavigationItem("1967")//Info1967
     object Info1969 : NavigationItem("1969")//Info1969

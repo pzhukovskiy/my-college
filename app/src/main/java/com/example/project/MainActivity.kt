@@ -36,6 +36,10 @@ import com.example.project.compose.screens.about_college.year_1971.Year1971
 import com.example.project.compose.screens.administration.DetailAdministrationScreen
 import com.example.project.compose.screens.administration.AdministrationScreen
 import com.example.project.compose.screens.contacts.ContactsPageScreen
+import com.example.project.compose.screens.employees.DetailEmployeeScreen
+import com.example.project.compose.screens.employees.EmployeeScreen
+import com.example.project.compose.screens.employeesAHCH.DetailEmployeeAhchScreen
+import com.example.project.compose.screens.employeesAHCH.EmployeeAhchScreen
 import com.example.project.compose.screens.home_page.HomepageScreen
 import com.example.project.compose.screens.lessons.group.LessonsScreenDayForGroup
 import com.example.project.compose.screens.lessons.group.LessonsScreenWeekForGroup
@@ -46,6 +50,7 @@ import com.example.project.compose.screens.news.DetailNewsScreen
 import com.example.project.compose.screens.news.ListAllNewsScreen
 import com.example.project.compose.screens.profile.ProfilePageScreen
 import com.example.project.compose.screens.registration.RegistrationPageScreen
+import com.example.project.compose.screens.schedule_time.ScheduleTimeScreen
 import com.example.project.compose.screens.teachers.DetailTeacherScreen
 import com.example.project.compose.screens.teachers.TeacherScreen
 import com.example.project.helper.ConnectionStatus
@@ -53,11 +58,15 @@ import com.example.project.helper.currentConnectivityStatus
 import com.example.project.helper.observeConnectivityAsFlow
 import com.example.project.navigation.NavigationItem
 import com.example.project.repository.administration.AdministratorRepositoryImplementation
+import com.example.project.repository.employee.EmployeeRepositoryImplementation
+import com.example.project.repository.employeeAHCH.EmployeeRepositoryImplementationAHCH
 import com.example.project.repository.lessons.LessonsRepositoryImplementation
 import com.example.project.repository.news.NewsRepositoryImplementation
 import com.example.project.repository.teachers.TeacherRepositoryImplementation
 import com.example.project.ui.theme.ProjectTheme
 import com.example.project.viewmodels.AdministratorViewModel
+import com.example.project.viewmodels.EmployeesAhchViewModel
+import com.example.project.viewmodels.EmployeesViewModel
 import com.example.project.viewmodels.LessonsViewModel
 import com.example.project.viewmodels.NewsViewModel
 import com.example.project.viewmodels.SharedViewModel
@@ -103,10 +112,11 @@ class MainActivity : ComponentActivity() {
                 ) {
 
                     val teacherViewModel = TeacherViewModel(TeacherRepositoryImplementation(), applicationContext)
-                    val administratorViewModel = AdministratorViewModel(
-                        AdministratorRepositoryImplementation(), applicationContext)
+                    val administratorViewModel = AdministratorViewModel(AdministratorRepositoryImplementation(), applicationContext)
                     val newsViewModel = NewsViewModel(NewsRepositoryImplementation(), applicationContext)
                     val lessonsViewModel = LessonsViewModel(LessonsRepositoryImplementation(), applicationContext)
+                    val employeesViewModel = EmployeesViewModel(EmployeeRepositoryImplementation(), applicationContext)
+                    val employeesAhchViewModel = EmployeesAhchViewModel(EmployeeRepositoryImplementationAHCH(), applicationContext)
 
 
                     //homepage
@@ -328,9 +338,72 @@ class MainActivity : ComponentActivity() {
                         }
                     }
 
+                    //list all employees
+                    composable(NavigationItem.ListEmployees.route) {
+                        EmployeeScreen(
+                            navController = navController,
+                            viewModel = employeesViewModel,
+                            onBackClick = {
+                                navController.popBackStack()
+                            }
+                        )
+                    }
+
+                    //information about employee
+                    composable("${NavigationItem.DetailEmployees.route}/{id}",
+                        arguments = listOf(navArgument("id") { type = NavType.IntType })
+                    ) { backStackEntry ->
+                        val itemID = backStackEntry.arguments?.getInt("id")
+                        val selectedItem = employeesViewModel.employeeList.find { it.id == itemID }
+                        selectedItem?.let {
+                            DetailEmployeeScreen(
+                                employee = it,
+                                onBackClick = {
+                                    navController.popBackStack()
+                                }
+                            )
+                        }
+                    }
+
+                    //list all employees ahch
+                    composable(NavigationItem.ListEmployeesAHCH.route) {
+                        EmployeeAhchScreen(
+                            navController = navController,
+                            viewModel = employeesAhchViewModel,
+                            onBackClick = {
+                                navController.popBackStack()
+                            }
+                        )
+                    }
+
+                    //information about employee ahch
+                    composable("${NavigationItem.DetailEmployeesAHCH.route}/{id}",
+                        arguments = listOf(navArgument("id") { type = NavType.IntType })
+                    ) { backStackEntry ->
+                        val itemID = backStackEntry.arguments?.getInt("id")
+                        val selectedItem = employeesAhchViewModel.employeeAhchList.find { it.id == itemID }
+                        selectedItem?.let {
+                            DetailEmployeeAhchScreen(
+                                employeeAhch = it,
+                                onBackClick = {
+                                    navController.popBackStack()
+                                }
+                            )
+                        }
+                    }
+
                     //contacts
                     composable(NavigationItem.ContactsPage.route) {
                         ContactsPageScreen(
+                            onBackClick = {
+                                navController.popBackStack()
+                            }
+                        )
+                    }
+
+                    //schedule time
+                    composable(NavigationItem.ScheduleTime.route) {
+                        ScheduleTimeScreen(
                             onBackClick = {
                                 navController.popBackStack()
                             }

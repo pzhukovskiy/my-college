@@ -2,6 +2,8 @@ package com.example.project.api
 
 import com.example.project.BuildConfig
 import com.example.project.data.administrators.Administrator
+import com.example.project.data.employees.Employee
+import com.example.project.data.employeesahch.EmployeeAHCH
 import com.example.project.data.group.Group
 import com.example.project.data.lessons.Lessons
 import com.example.project.data.news.News
@@ -20,6 +22,14 @@ interface ApiService {
     @Headers(BuildConfig.API_KEY)
     @GET("teachers")
     suspend fun getTeachers(): List<Teacher>
+
+    @Headers(BuildConfig.API_KEY)
+    @GET("employees")
+    suspend fun getEmployees(): List<Employee>
+
+    @Headers(BuildConfig.API_KEY)
+    @GET("employeesahch")
+    suspend fun getEmployeesAHCH(): List<EmployeeAHCH>
 
     @Headers(BuildConfig.API_KEY)
     @GET("administrators")
