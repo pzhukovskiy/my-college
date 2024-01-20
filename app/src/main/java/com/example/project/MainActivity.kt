@@ -395,6 +395,7 @@ class MainActivity : ComponentActivity() {
                     //contacts
                     composable(NavigationItem.ContactsPage.route) {
                         ContactsPageScreen(
+                            context = LocalContext.current,
                             onBackClick = {
                                 navController.popBackStack()
                             }

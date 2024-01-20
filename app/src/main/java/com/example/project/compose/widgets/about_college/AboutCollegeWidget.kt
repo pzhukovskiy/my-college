@@ -45,7 +45,7 @@ fun AboutCollegeWidget(
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
         )
-        Column() {
+        Column {
             Box(
                 modifier = Modifier
                     .height(150.dp)
