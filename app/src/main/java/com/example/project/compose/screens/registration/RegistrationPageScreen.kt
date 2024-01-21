@@ -6,11 +6,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -45,44 +45,54 @@ fun RegistrationPageScreen(
         }
     }
 
+
     Column {
         Box(
             modifier = Modifier
                 .weight(1f)
                 .fillMaxWidth()
-                .padding(horizontal = 12.dp, vertical = 4.dp)
+                .padding(top = 50.dp)
         ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 200.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                Column {
+            Row {
+                Box(
+                    modifier = Modifier
+                        .height(60.dp)
+                        .weight(0.2f)
+                        .padding(horizontal = 12.dp, vertical = 4.dp),
+                    contentAlignment = Alignment.Center
+                ) {
                     Image(
                         painter = painterResource(id = R.drawable.logo),
                         contentDescription = null,
-                        contentScale = ContentScale.Crop,
                         modifier = Modifier
-                            .width(120.dp)
-                            .height(120.dp)
+                            .size(30.dp)
                     )
-                    Text(
-                        text = "Мой колледж",
-                        fontFamily = Roboto,
-                        fontStyle = FontStyle.Normal,
-                        fontWeight = FontWeight(700),
-                        style = MaterialTheme.typography.body1,
-                        textAlign = TextAlign.Center,
-                    )
-                    Text(
-                        text = "Расписание всегда под рукой",
-                        fontFamily = Roboto,
-                        fontStyle = FontStyle.Normal,
-                        fontWeight = FontWeight(400),
-                        style = MaterialTheme.typography.body2,
-                        textAlign = TextAlign.Center,
-                    )
+                }
+                Box(
+                    modifier = Modifier
+                        .height(60.dp)
+                        .weight(1f)
+                        .padding(horizontal = 12.dp, vertical = 4.dp),
+                    contentAlignment = Alignment.CenterStart
+                ) {
+                    Column {
+                        Text(
+                            text = "Мой колледж",
+                            fontFamily = Roboto,
+                            fontStyle = FontStyle.Normal,
+                            fontWeight = FontWeight(700),
+                            style = MaterialTheme.typography.body1,
+                            textAlign = TextAlign.Center,
+                        )
+                        Text(
+                            text = "Расписание всегда под рукой",
+                            fontFamily = Roboto,
+                            fontStyle = FontStyle.Normal,
+                            fontWeight = FontWeight(400),
+                            style = MaterialTheme.typography.body2,
+                            textAlign = TextAlign.Center,
+                        )
+                    }
                 }
             }
         }
