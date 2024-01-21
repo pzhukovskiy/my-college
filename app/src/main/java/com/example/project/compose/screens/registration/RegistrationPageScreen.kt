@@ -1,18 +1,36 @@
 package com.example.project.compose.screens.registration
 
 import android.widget.Toast
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Button
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.project.R
 import com.example.project.auth.SignInState
+import com.example.project.ui.theme.PrimaryBlue
+import com.example.project.ui.theme.Roboto
 
 @Composable
 fun RegistrationPageScreen(
@@ -27,14 +45,72 @@ fun RegistrationPageScreen(
         }
     }
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        contentAlignment = Alignment.Center
-    ) {
-        Button(onClick = onSignInClick) {
-            Text(text = "Зарегистрироваться с google")
+    Column {
+        Box(
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth()
+                .padding(horizontal = 12.dp, vertical = 4.dp)
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 200.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Column {
+                    Image(
+                        painter = painterResource(id = R.drawable.logo),
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .width(120.dp)
+                            .height(120.dp)
+                    )
+                    Text(
+                        text = "Мой колледж",
+                        fontFamily = Roboto,
+                        fontStyle = FontStyle.Normal,
+                        fontWeight = FontWeight(700),
+                        style = MaterialTheme.typography.body1,
+                        textAlign = TextAlign.Center,
+                    )
+                    Text(
+                        text = "Расписание всегда под рукой",
+                        fontFamily = Roboto,
+                        fontStyle = FontStyle.Normal,
+                        fontWeight = FontWeight(400),
+                        style = MaterialTheme.typography.body2,
+                        textAlign = TextAlign.Center,
+                    )
+                }
+            }
+        }
+        Box(
+            modifier = Modifier
+                .weight(0.2f)
+                .fillMaxWidth()
+                .padding(horizontal = 12.dp, vertical = 4.dp)
+        ) {
+            Box(
+                modifier = Modifier
+                    .height(50.dp)
+                    .fillMaxWidth()
+                    .clickable {
+                        onSignInClick()
+                    }
+                    .background(Color(PrimaryBlue.toArgb())),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "Начать",
+                    fontFamily = Roboto,
+                    color = Color.White,
+                    fontSize = 18.sp,
+                    fontStyle = FontStyle.Normal,
+                    fontWeight = FontWeight(500)
+                )
+            }
         }
     }
 }

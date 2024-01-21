@@ -3,6 +3,7 @@ package com.example.project.compose.screens.lessons.group
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -112,6 +113,29 @@ fun LessonsScreenWeekForGroup(
                     Spacer(modifier = Modifier.height(50.dp))
                 }
             })
+        }
+    }
+    else {
+        Column {
+
+            StaticHeaderWidget(
+                text = "${CurrentDate().dayOfWeekString[0].uppercaseChar() + CurrentDate().dayOfWeekString.substringAfter(CurrentDate().dayOfWeekString[0])}, ${CurrentDate().currentDayOfMonth}.${CurrentDate().currentMonth}.${CurrentDate().currentYear}",
+                imagePainter = painterResource(id = R.drawable.dark_gray_background_with_polygonal_forms_vector),
+                onBackClick = {
+                    onBackClick()
+                }
+            )
+
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Text(
+                    text = "Занятий на эту неделю не найдено",
+                    fontFamily = Roboto,
+                    color = Color.Black,
+                    fontSize = 16.sp,
+                    fontStyle = FontStyle.Normal,
+                    fontWeight = FontWeight(500)
+                )
+            }
         }
     }
 }

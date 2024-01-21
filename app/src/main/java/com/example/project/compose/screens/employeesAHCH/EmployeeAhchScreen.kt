@@ -119,6 +119,15 @@ fun EmployeeAhchScreen(
                                                 fontWeight = FontWeight(500),
                                                 modifier = Modifier.padding(start = 4.dp)
                                             )
+                                            Text(
+                                                text = "${stringResource(id = R.string.administration_position)} ${employee.position}",
+                                                style = MaterialTheme.typography.body2,
+                                                color = Color.Black,
+                                                fontFamily = Roboto,
+                                                fontStyle = FontStyle.Normal,
+                                                fontWeight = FontWeight(400),
+                                                modifier = Modifier.padding(start = 4.dp)
+                                            )
                                             Box(
                                                 modifier = Modifier
                                                     .fillMaxSize()
