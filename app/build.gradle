@@ -26,6 +26,7 @@ android {
 
         buildConfigField("String", "BASE_URL", "\"${properties.getProperty("BASE_URL")}\"")
         buildConfigField("String", "API_KEY", "\"${properties.getProperty("API_KEY")}\"")
+        buildConfigField("String", "FIREBASE", "\"${properties.getProperty("FIREBASE")}\"")
     }
 
     buildTypes {

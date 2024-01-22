@@ -16,7 +16,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Path
-import retrofit2.http.Query
 
 interface ApiService {
     @Headers(BuildConfig.API_KEY)

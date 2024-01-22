@@ -34,12 +34,10 @@
     <string name="link_employee">Работники</string>
     <string name="link_employee_ahch">Работники АХЧ</string>
 
-    <string name="link_applicant">Абитуриентам</string>
     <string name="link_schedule">Расписание</string>
     <string name="link_schedule_day">Расписание на день</string>
     <string name="link_schedule_week">Расписание на неделю</string>
     <string name="link_calls">Расписание звонков</string>
-    <string name="link_courses">Платные курсы</string>
     <string name="link_archive_news">Архив новостей</string>
 
     <string name="administration">Администрация колледжа</string>
@@ -79,6 +77,4 @@
 
     <string name="director_telephone">374 11 62</string>
     <string name="priemnaya_telephone">374 11 62</string>
-
-    <string name="web_client_id">542050235298-4o4ue82ts8iq12jvogd1c8a34i8jbefo.apps.googleusercontent.com</string>
 </resources>

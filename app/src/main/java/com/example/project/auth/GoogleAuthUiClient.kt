@@ -3,7 +3,7 @@ package com.example.project.auth
 import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
-import com.example.project.R
+import com.example.project.BuildConfig
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.BeginSignInRequest.GoogleIdTokenRequestOptions
 import com.google.android.gms.auth.api.identity.SignInClient
@@ -82,7 +82,7 @@ class GoogleAuthUiClient(
                 GoogleIdTokenRequestOptions.builder()
                     .setSupported(true)
                     .setFilterByAuthorizedAccounts(false)
-                    .setServerClientId(context.getString(R.string.web_client_id))
+                    .setServerClientId(BuildConfig.FIREBASE)
                     .build()
             )
             .setAutoSelectEnabled(true)

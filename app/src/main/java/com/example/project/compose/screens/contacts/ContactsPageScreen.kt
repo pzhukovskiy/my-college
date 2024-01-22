@@ -48,9 +48,9 @@ fun ContactsPageScreen(
         ),
         Contacts(
             id = uuid.toString(),
-            position = stringResource(id = R.string.director),
-            name = stringResource(id = R.string.director_name),
-            telephone = stringResource(id = R.string.director_telephone)
+            position = stringResource(id = R.string.priemnaya),
+            name = stringResource(id = R.string.priemnaya_name),
+            telephone = stringResource(id = R.string.priemnaya_telephone)
         ),
         Contacts(
             id = uuid.toString(),
