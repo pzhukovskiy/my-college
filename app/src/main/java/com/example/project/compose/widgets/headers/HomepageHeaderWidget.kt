@@ -1,7 +1,6 @@
 package com.example.project.compose.widgets.headers
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,36 +20,27 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.example.project.R
 import com.example.project.auth.UserData
 import com.example.project.navigation.NavigationItem
 import com.example.project.ui.theme.Roboto
-import java.lang.Float
 
 @Composable
-fun AnimatedHeaderWidget(
+fun HomepageHeaderWidget(
     text: String,
     imagePainter: Painter,
-    scrollState: ScrollState,
     navController: NavController,
-    userData: UserData?
+    userData: UserData?,
 ) {
     Box(
         modifier = Modifier
-            .height(80.dp)
-            .graphicsLayer {
-                alpha = Float.min(1f, (scrollState.value.toFloat() / (scrollState.maxValue / 3)))
-            },
+            .height(80.dp),
         contentAlignment = Alignment.Center
     ) {
         Image(

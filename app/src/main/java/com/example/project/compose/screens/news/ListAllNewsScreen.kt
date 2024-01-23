@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -52,6 +53,7 @@ fun ListAllNewsScreen(
             )
             LazyColumn(content = {
                 items(viewModel.newsList.reversed()) { news ->
+                    Divider()
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -126,6 +128,7 @@ fun ListAllNewsScreen(
                             }
                         }
                     }
+                    Divider()
                 }
                 item {
                     Spacer(modifier = Modifier.height(45.dp))

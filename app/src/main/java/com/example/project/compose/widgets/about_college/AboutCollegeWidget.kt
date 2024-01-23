@@ -48,7 +48,7 @@ fun AboutCollegeWidget(
         Column {
             Box(
                 modifier = Modifier
-                    .height(150.dp)
+                    .height(100.dp)
                     .width(400.dp)
                     .padding(horizontal = 12.dp, vertical = 4.dp),
                 contentAlignment = Alignment.CenterStart
@@ -76,14 +76,14 @@ fun AboutCollegeWidget(
             }
             Box(
                 modifier = Modifier
-                    .height(150.dp)
-                    .width(400.dp)
+                    .height(200.dp)
+                    .fillMaxWidth()
                     .padding(horizontal = 12.dp, vertical = 4.dp),
                 contentAlignment = Alignment.Center
             ) {
                 Box(
                     modifier = Modifier
-                        .padding(top = 60.dp)
+                        .padding(top = 110.dp)
                         .height(40.dp)
                         .fillMaxWidth()
                         .background(Color(PrimaryBlue.toArgb()))

@@ -12,6 +12,7 @@ import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
 import androidx.compose.ui.platform.LocalContext
@@ -25,6 +26,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import androidx.room.Room
 import com.example.project.auth.GoogleAuthUiClient
 import com.example.project.auth.SignInViewModel
 import com.example.project.compose.screens.about_college.AboutCollegeScreen
@@ -48,11 +50,13 @@ import com.example.project.compose.screens.lessons.teacher.LessonsScreenWeekForT
 import com.example.project.compose.screens.links.ListAllLinksScreen
 import com.example.project.compose.screens.news.DetailNewsScreen
 import com.example.project.compose.screens.news.ListAllNewsScreen
+import com.example.project.compose.screens.profile.AdminWebViewScreen
 import com.example.project.compose.screens.profile.ProfilePageScreen
 import com.example.project.compose.screens.registration.RegistrationPageScreen
 import com.example.project.compose.screens.schedule_time.ScheduleTimeScreen
 import com.example.project.compose.screens.teachers.DetailTeacherScreen
 import com.example.project.compose.screens.teachers.TeacherScreen
+import com.example.project.data.database.GroupDatabase
 import com.example.project.helper.ConnectionStatus
 import com.example.project.helper.currentConnectivityStatus
 import com.example.project.helper.observeConnectivityAsFlow
@@ -60,6 +64,7 @@ import com.example.project.navigation.NavigationItem
 import com.example.project.repository.administration.AdministratorRepositoryImplementation
 import com.example.project.repository.employee.EmployeeRepositoryImplementation
 import com.example.project.repository.employeeAHCH.EmployeeRepositoryImplementationAHCH
+import com.example.project.repository.group.GroupsRepositoryImplementation
 import com.example.project.repository.lessons.LessonsRepositoryImplementation
 import com.example.project.repository.news.NewsRepositoryImplementation
 import com.example.project.repository.teachers.TeacherRepositoryImplementation
@@ -67,6 +72,7 @@ import com.example.project.ui.theme.ProjectTheme
 import com.example.project.viewmodels.AdministratorViewModel
 import com.example.project.viewmodels.EmployeesAhchViewModel
 import com.example.project.viewmodels.EmployeesViewModel
+import com.example.project.viewmodels.GroupsViewModel
 import com.example.project.viewmodels.LessonsViewModel
 import com.example.project.viewmodels.NewsViewModel
 import com.example.project.viewmodels.SharedViewModel
@@ -81,6 +87,14 @@ class MainActivity : ComponentActivity() {
             context = applicationContext,
             oneTapClient = Identity.getSignInClient(applicationContext)
         )
+    }
+
+    private val db by lazy {
+        Room.databaseBuilder(
+            applicationContext,
+            GroupDatabase::class.java,
+            "groups.db"
+        ).build()
     }
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -105,6 +119,9 @@ class MainActivity : ComponentActivity() {
 
             val sharedViewModel: SharedViewModel = viewModel()
 
+            val groupViewModel = GroupsViewModel(GroupsRepositoryImplementation(), applicationContext, db.dao)
+            val groupState by groupViewModel.state.collectAsState()
+
             ProjectTheme {
                 NavHost(
                     navController = navController,
@@ -118,14 +135,15 @@ class MainActivity : ComponentActivity() {
                     val employeesViewModel = EmployeesViewModel(EmployeeRepositoryImplementation(), applicationContext)
                     val employeesAhchViewModel = EmployeesAhchViewModel(EmployeeRepositoryImplementationAHCH(), applicationContext)
 
-
                     //homepage
                     composable(NavigationItem.Homepage.route) {
                             HomepageScreen(
                                 navController = navController,
                                 newsViewModel = newsViewModel,
                                 userData = googleAuthUiClient.getSignedInUser(),
-                                viewModel = sharedViewModel
+                                viewModel = sharedViewModel,
+                                db = db,
+                                state = groupState
                             )
                     }
 
@@ -150,6 +168,7 @@ class MainActivity : ComponentActivity() {
                         LessonsScreenDayForGroup(
                             lessonsViewModel = lessonsViewModel,
                             viewModel = sharedViewModel,
+                            navController = navController,
                             onBackClick = {
                                 navController.popBackStack()
                             }
@@ -171,6 +190,7 @@ class MainActivity : ComponentActivity() {
                     composable(NavigationItem.LessonsScreenWeekGroup.route) {
                         LessonsScreenWeekForGroup(
                             lessonsViewModel = lessonsViewModel,
+                            navController = navController,
                             onBackClick = {
                                 navController.popBackStack()
                             }
@@ -181,6 +201,7 @@ class MainActivity : ComponentActivity() {
                     composable(NavigationItem.LessonsScreenWeekTeacher.route) {
                         LessonsScreenWeekForTeacher(
                             lessonsViewModel = lessonsViewModel,
+                            navController = navController,
                             onBackClick = {
                                 navController.popBackStack()
                             }
@@ -264,14 +285,24 @@ class MainActivity : ComponentActivity() {
                             onSignOut = {
                                 lifecycleScope.launch {
                                     googleAuthUiClient.signOut()
-                                    Toast.makeText(applicationContext, "Успешно вышли", Toast.LENGTH_LONG).show()
+                                    Toast.makeText(applicationContext, "Успешный выход", Toast.LENGTH_LONG).show()
                                     navController.navigate(NavigationItem.RegistrationPage.route)
                                 }
                             },
+                            navController = navController,
+                            db = db,
+                            state = groupState,
+                            onEvent = groupViewModel::onEvent,
+                            viewModel = sharedViewModel,
                             onBackClick = {
                                 navController.popBackStack()
                             }
                         )
+                    }
+
+                    //administrator web-view
+                    composable(NavigationItem.AdministratorWebView.route) {
+                        AdminWebViewScreen()
                     }
 
                     //about college

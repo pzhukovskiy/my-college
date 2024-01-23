@@ -7,6 +7,7 @@ sealed class NavigationItem(val route: String) {
     object ListAllLinks : NavigationItem("ListAllLinks")//ListAllLinksScreen
     object RegistrationPage : NavigationItem("RegistrationPage")//RegistrationPageScreen
     object Profile : NavigationItem("ProfilePage")//ProfilePageScreen
+    object AdministratorWebView : NavigationItem("AdministratorWebView")//AdministratorWebViewScreen
     object AboutCollege : NavigationItem("AboutCollege")//AboutCollegeScreen
     object ListAdministration : NavigationItem("ListAdministration")//ListAdministrationScreen
     object DetailAdministration : NavigationItem("DetailAdministration")//DetailAdministrationScreen

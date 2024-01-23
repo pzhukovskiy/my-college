@@ -42,6 +42,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
 import androidx.navigation.NavHostController
 import com.example.project.R
+import com.example.project.data.database.GroupDatabase
+import com.example.project.data.database.GroupState
 import com.example.project.viewmodels.SharedViewModel
 import com.example.project.navigation.NavigationItem
 import com.example.project.repository.group.GroupsRepositoryImplementation
@@ -54,7 +56,9 @@ import com.example.project.viewmodels.TeacherViewModel
 @Composable
 fun ScheduleSelectButtonWidget(
     navController: NavHostController,
-    viewModel: SharedViewModel
+    viewModel: SharedViewModel,
+    db: GroupDatabase,
+    state: GroupState
 ) {
     var expandedGroup by remember { mutableStateOf(false) }
     var selectedItemGroup by remember { mutableStateOf("") }
@@ -81,7 +85,7 @@ fun ScheduleSelectButtonWidget(
         Icons.Filled.KeyboardArrowDown
     }
 
-    val groupViewModel = GroupsViewModel(GroupsRepositoryImplementation(), LocalContext.current)
+    val groupViewModel = GroupsViewModel(GroupsRepositoryImplementation(), LocalContext.current, db.dao)
     val teacherViewModel = TeacherViewModel(TeacherRepositoryImplementation(), LocalContext.current)
 
     val context = LocalContext.current

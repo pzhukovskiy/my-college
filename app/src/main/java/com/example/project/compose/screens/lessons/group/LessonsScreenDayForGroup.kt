@@ -1,5 +1,6 @@
 package com.example.project.compose.screens.lessons.group
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -9,19 +10,24 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.project.R
 import com.example.project.compose.widgets.headers.StaticHeaderWidget
+import com.example.project.navigation.NavigationItem
+import com.example.project.ui.theme.PrimaryBlue
 import com.example.project.ui.theme.Roboto
 import com.example.project.utils.CurrentDate
 import com.example.project.viewmodels.SharedViewModel
@@ -31,7 +37,8 @@ import com.example.project.viewmodels.LessonsViewModel
 fun LessonsScreenDayForGroup(
     viewModel: SharedViewModel,
     lessonsViewModel: LessonsViewModel,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    navController: NavController
 ) {
 
     val sharedValue = viewModel.sharedValue.value
@@ -70,6 +77,7 @@ fun LessonsScreenDayForGroup(
 
             LazyColumn(content = {
                 items(lessonsViewModel.lessonsList) { lesson ->
+                    Divider()
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -94,9 +102,13 @@ fun LessonsScreenDayForGroup(
                             Text(
                                 text = "${lesson.teacher.middle_name} ${lesson.teacher.first_name[0].uppercaseChar()}. ${lesson.teacher.last_name[0].uppercaseChar()}.",
                                 fontFamily = Roboto,
-                                color = Color.Black,
+                                color = Color(PrimaryBlue.toArgb()),
                                 fontStyle = FontStyle.Normal,
-                                fontWeight = FontWeight(400)
+                                fontWeight = FontWeight(400),
+                                modifier = Modifier
+                                    .clickable {
+                                        navController.navigate("${NavigationItem.DetailTeacher.route}/${lesson.teacher.id}")
+                                    }
                             )
                             Text(
                                 text = lesson.room.room,
@@ -107,6 +119,7 @@ fun LessonsScreenDayForGroup(
                             )
                         }
                     }
+                    Divider()
                 }
                 item {
                     Spacer(modifier = Modifier.height(50.dp))

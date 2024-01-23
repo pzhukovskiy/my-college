@@ -10,15 +10,91 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.project.data.database.GroupEvent
+import com.example.project.data.database.GroupState
+import com.example.project.data.database.SortType
+import com.example.project.data.database.dao.GroupDAO
+import com.example.project.data.database.data.Item
 import com.example.project.data.group.Group
 import com.example.project.repository.group.GroupsRepository
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flatMapConcat
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class GroupsViewModel(
     private val groupsRepository: GroupsRepository,
-    private val context: Context
+    private val context: Context,
+    private val dao: GroupDAO
 ) : ViewModel() {
+
+    private val _sortType = MutableStateFlow(SortType.GROUP)
+    private val _items = _sortType
+        .flatMapConcat { sortType ->
+            when(sortType) {
+                SortType.GROUP -> dao.getGroupsOrderedByName()
+            }
+        }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
+
+    private val _state = MutableStateFlow(GroupState())
+    val state = combine(_state, _sortType, _items) {state, sortType, items ->
+        state.copy(
+            groups = items,
+            sortType = sortType
+        )
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), GroupState())
+
+    fun onEvent(event: GroupEvent) {
+        when(event) {
+            is GroupEvent.SaveGroup -> {
+                val name = state.value.Name
+                val groupID = state.value.Group
+                if(name.isBlank()) {
+                    return
+                }
+
+                val group = Item(
+                    Name = name,
+                    Group = groupID
+                )
+
+                viewModelScope.launch {
+                    dao.upsertGroup(group)
+                }
+
+                _state.update {it.copy(
+                    isAddingGroup = true,
+                    Name = "",
+                )}
+            }
+
+            is GroupEvent.DeleteItem -> {
+                viewModelScope.launch {
+                    dao.deleteGroup(event.group)
+                }
+            }
+
+            is GroupEvent.SetGroupName -> {
+                _state.update {it.copy(
+                    Name = event.Name
+                )}
+            }
+
+            is GroupEvent.SetGroupId -> {
+                _state.update {it.copy(
+                    Group = event.Group
+                )}
+            }
+            is GroupEvent.SortGroups -> {
+                _sortType.value = event.sortType
+            }
+        }
+    }
 
     private val _groups = mutableStateListOf<Group>()
     var errorMessage: String by mutableStateOf("")
