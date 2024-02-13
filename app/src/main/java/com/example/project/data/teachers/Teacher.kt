@@ -1,6 +1,5 @@
 package com.example.project.data.teachers
 
-
 data class Teacher(
     val id: Int,
     val room: Room,

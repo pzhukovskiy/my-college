@@ -68,13 +68,4 @@
 
     <string name="connection">Произошла ошибка при подключении</string>
     <string name="connection_retry">Повторить попытку</string>
-
-    <string name="director">Директор</string>
-    <string name="priemnaya">Приемная</string>
-
-    <string name="director_name">Козел Георгий Владимирович</string>
-    <string name="priemnaya_name">Кислухина Светлана Анатольевна</string>
-
-    <string name="director_telephone">374 11 62</string>
-    <string name="priemnaya_telephone">374 11 62</string>
 </resources>

@@ -67,15 +67,16 @@ fun DetailAdministrationScreen(
                     color = Color.Black,
                     fontStyle = FontStyle.Normal,
                     fontWeight = FontWeight(400),
-                    modifier = Modifier.padding(horizontal = 4.dp)
+                    modifier = Modifier.padding(horizontal = 8.dp)
                 )
+
                 Text(
                     text = administrator.second_description,
                     fontFamily = Roboto,
                     color = Color.Black,
                     fontStyle = FontStyle.Normal,
                     fontWeight = FontWeight(400),
-                    modifier = Modifier.padding(horizontal = 4.dp)
+                    modifier = Modifier.padding(horizontal = 8.dp)
                 )
                 Spacer(modifier = Modifier.height(45.dp))
             }

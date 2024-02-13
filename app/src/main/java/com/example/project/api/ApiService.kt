@@ -42,7 +42,6 @@ interface ApiService {
     @GET("groups")
     suspend fun getGroups(): List<Group>
 
-
     //day group
     @Headers(BuildConfig.API_KEY)
     @GET("getcurrent/{id}")

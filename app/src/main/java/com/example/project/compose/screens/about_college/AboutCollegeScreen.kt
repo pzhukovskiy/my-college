@@ -38,6 +38,16 @@ fun AboutCollegeScreen(
         Links(id = uuid.toString(), text = "1969 год",  route = NavigationItem.Info1969.route),
         Links(id = uuid.toString(), text = "1970 год",  route = NavigationItem.Info1970.route),
         Links(id = uuid.toString(), text = "1971 год",  route = NavigationItem.Info1971.route),
+        Links(id = uuid.toString(), text = "1974 год",  route = NavigationItem.Info1974.route),
+        Links(id = uuid.toString(), text = "1980 год",  route = NavigationItem.Info1980.route),
+        Links(id = uuid.toString(), text = "1990 год",  route = NavigationItem.Info1990.route),
+        Links(id = uuid.toString(), text = "2000 год",  route = NavigationItem.Info2000.route),
+        Links(id = uuid.toString(), text = "2010 год",  route = NavigationItem.Info2010.route),
+        Links(id = uuid.toString(), text = "2020 год",  route = NavigationItem.Info2020.route),
+        Links(id = uuid.toString(), text = "2021 год",  route = NavigationItem.Info2021.route),
+        Links(id = uuid.toString(), text = "2022 год",  route = NavigationItem.Info2022.route),
+        Links(id = uuid.toString(), text = "2023 год",  route = NavigationItem.Info2023.route),
+        Links(id = uuid.toString(), text = "2024 год",  route = NavigationItem.Info2024.route),
     )
 
     Column {

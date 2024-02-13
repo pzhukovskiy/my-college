@@ -12,13 +12,17 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.project.R
 import com.example.project.compose.widgets.headers.StaticHeaderWidget
 import com.example.project.data.teachers.Teacher
+import com.example.project.ui.theme.Roboto
 
 @Composable
 fun DetailTeacherScreen(
@@ -57,8 +61,14 @@ fun DetailTeacherScreen(
                     )
                 }
 
-                Text(text = teacher.description, modifier = Modifier.padding(horizontal = 4.dp))
-                Text(text = teacher.room.room, modifier = Modifier.padding(horizontal = 4.dp))
+                Text(
+                    text = teacher.description,
+                    fontFamily = Roboto,
+                    color = Color.Black,
+                    fontStyle = FontStyle.Normal,
+                    fontWeight = FontWeight(400),
+                    modifier = Modifier.padding(horizontal = 8.dp)
+                )
                 Spacer(modifier = Modifier.height(45.dp))
             }
         }

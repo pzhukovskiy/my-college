@@ -119,15 +119,6 @@ fun TeacherScreen(
                                                 fontWeight = FontWeight(500),
                                                 modifier = Modifier.padding(start = 4.dp)
                                             )
-                                            Text(
-                                                text = "Кабинет: ${teacher.room.room}",
-                                                style = MaterialTheme.typography.body2,
-                                                color = Color.Black,
-                                                fontFamily = Roboto,
-                                                fontStyle = FontStyle.Normal,
-                                                fontWeight = FontWeight(400),
-                                                modifier = Modifier.padding(start = 4.dp)
-                                            )
                                             Box(
                                                 modifier = Modifier
                                                     .fillMaxSize()

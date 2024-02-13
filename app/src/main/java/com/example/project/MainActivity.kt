@@ -35,6 +35,16 @@ import com.example.project.compose.screens.about_college.year_1967.Year1967
 import com.example.project.compose.screens.about_college.year_1969.Year1969
 import com.example.project.compose.screens.about_college.year_1970.Year1970
 import com.example.project.compose.screens.about_college.year_1971.Year1971
+import com.example.project.compose.screens.about_college.year_1974.Year1974
+import com.example.project.compose.screens.about_college.year_1980.Year1980
+import com.example.project.compose.screens.about_college.year_1990.Year1990
+import com.example.project.compose.screens.about_college.year_2000.Year2000
+import com.example.project.compose.screens.about_college.year_2010.Year2010
+import com.example.project.compose.screens.about_college.year_2020.Year2020
+import com.example.project.compose.screens.about_college.year_2021.Year2021
+import com.example.project.compose.screens.about_college.year_2022.Year2022
+import com.example.project.compose.screens.about_college.year_2023.Year2023
+import com.example.project.compose.screens.about_college.year_2024.Year2024
 import com.example.project.compose.screens.administration.DetailAdministrationScreen
 import com.example.project.compose.screens.administration.AdministrationScreen
 import com.example.project.compose.screens.contacts.ContactsPageScreen
@@ -481,6 +491,96 @@ class MainActivity : ComponentActivity() {
                     //1971
                     composable(NavigationItem.Info1971.route) {
                         Year1971(
+                            onBackClick = {
+                                navController.popBackStack()
+                            }
+                        )
+                    }
+
+                    //1974
+                    composable(NavigationItem.Info1974.route) {
+                        Year1974(
+                            onBackClick = {
+                                navController.popBackStack()
+                            }
+                        )
+                    }
+
+                    //1980
+                    composable(NavigationItem.Info1980.route) {
+                        Year1980(
+                            onBackClick = {
+                                navController.popBackStack()
+                            }
+                        )
+                    }
+
+                    //1990
+                    composable(NavigationItem.Info1990.route) {
+                        Year1990(
+                            onBackClick = {
+                                navController.popBackStack()
+                            }
+                        )
+                    }
+
+                    //2000
+                    composable(NavigationItem.Info2000.route) {
+                        Year2000(
+                            onBackClick = {
+                                navController.popBackStack()
+                            }
+                        )
+                    }
+
+                    //2010
+                    composable(NavigationItem.Info2010.route) {
+                        Year2010(
+                            onBackClick = {
+                                navController.popBackStack()
+                            }
+                        )
+                    }
+
+                    //2020
+                    composable(NavigationItem.Info2020.route) {
+                        Year2020(
+                            onBackClick = {
+                                navController.popBackStack()
+                            }
+                        )
+                    }
+
+                    //2021
+                    composable(NavigationItem.Info2021.route) {
+                        Year2021(
+                            onBackClick = {
+                                navController.popBackStack()
+                            }
+                        )
+                    }
+
+                    //2022
+                    composable(NavigationItem.Info2022.route) {
+                        Year2022(
+                            onBackClick = {
+                                navController.popBackStack()
+                            }
+                        )
+                    }
+
+                    //2000
+                    composable(NavigationItem.Info2023.route) {
+                        Year2023(
+                            onBackClick = {
+                                navController.popBackStack()
+                            }
+                        )
+                    }
+
+                    //2023
+                    composable(NavigationItem.Info2024.route) {
+                        Year2024(
                             onBackClick = {
                                 navController.popBackStack()
                             }
